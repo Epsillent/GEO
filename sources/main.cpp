@@ -1,5 +1,6 @@
 #include "engine.hpp"
 #include "scenes/battlefield.hpp"
+#include "scenes/main_menu.hpp"
 
 int main() {
     Engine *engine = new Engine;
