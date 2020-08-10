@@ -3,6 +3,7 @@
 
 #include "engine.hpp"
 #include "components/particle_system.hpp"
+#include "entities/entity.hpp"
 
 class Shooter: public GameObject{
     private:

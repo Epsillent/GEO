@@ -19,10 +19,24 @@ Shooter::Shooter(sf::Vector2f coordinates){
 
 void Shooter::on_update(float dt) {
     timer += dt;
+    float speed = 200;
     if(timer > 3){
         sf::Vector2f bullet_direction(1, 0);
-        Bullet *bullet = new Bullet(bullet_direction, m_coordinates, bullet_speed, bullet_partical_sys_pr);       
-        object_introduce(bullet);        
+        //Bullet *bullet = 
+       // scene()->object_introduce(new Bullet(bullet_direction, m_coordinates, bullet_speed, bullet_partical_sys_pr));    
+        //object_introduce(bullet);        
         timer -= 3;
+    }
+    if(Input::key_pressed(KeyCode::W)){
+        translate(0,-speed*dt);
+    }
+    if(Input::key_pressed(KeyCode::S)){
+        translate(0,speed*dt);
+    }
+    if(Input::key_pressed(KeyCode::D)){
+        translate(speed*dt,0);
+    }
+    if(Input::key_pressed(KeyCode::A)){
+        translate(-speed*dt,0);
     }
 }

@@ -1,6 +1,7 @@
 #include "scenes/battlefield.hpp"
 #include "entities/generator.hpp"
 #include "entities/shooter.hpp"
+#include "entities/protector.hpp"
 #include "entities/resources.hpp"
 #include "engine.hpp"
 #include "scenes/resourcesViewController.hpp"
@@ -11,9 +12,11 @@ void Battlefield::on_init() {
     
     Engine::get_singleton()->set_ui_controller(resources_view_controller);
     Resources *left_resources = new Resources(resources_view_controller->left_resources);
+    Resources *right_resources = new Resources(resources_view_controller->right_resources);
 
-    object_introduce(new Generator(1, left_resources, sf::Vector2f(300,300)) );
-    object_introduce(new Generator(1, left_resources, sf::Vector2f(600,300)) );
+    //object_introduce(new Generator(1, left_resources, sf::Vector2f(300, 300)) );
+    object_introduce(new Generator(1, left_resources, sf::Vector2f(600, 100)) );
+    //object_introduce(new Protector(sf::Vector2f(800,600)));
 }
 
 void Battlefield::on_update(float dt) {
