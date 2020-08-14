@@ -8,7 +8,7 @@
 
 class Resources: public GameObject {
     private:
-        int m_resources_count;
+        int m_resources_count=0;
         TextView *m_text_view;
         int timer=0;
     public:

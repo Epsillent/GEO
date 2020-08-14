@@ -2,15 +2,15 @@ ENGINE_PATH := ../../engine
 INCLUDE := -I$(ENGINE_PATH)/sources/ -I$(ENGINE_PATH)/thirdparty/include -I./sources
 
 
-CC_LINUX := clang
-CFLAGS_LINUX := -Werror -std=c++11
+CC_LINUX := g++
+CFLAGS_LINUX := -Werror -std=c++17
 LINKER_FLAGS_LINUX := -lX11 -lstdc++ -lm -lpthread
 LINKER_FLAGS_LINUX_BUILD := $(LINKER_FLAGS_LINUX) -Wl,-R$(ENGINE_PATH)/thirdparty/lib/Linux $(ENGINE_PATH)/libengine.so $(ENGINE_PATH)/thirdparty/lib/Linux/libsfml-audio.so $(ENGINE_PATH)/thirdparty/lib/Linux/libsfml-window.so $(ENGINE_PATH)/thirdparty/lib/Linux/libsfml-graphics.so $(ENGINE_PATH)/thirdparty/lib/Linux/libsfml-system.so $(ENGINE_PATH)/thirdparty/lib/Linux/libsfml-network.so
 LINKER_FLAGS_LINUX_DISTRIBUTION := $(LINKER_FLAGS_LINUX) -Llibs -Wl,-R./libs -lengine -lsfml-window -lsfml-graphics -lsfml-system -lsfml-network -lsfml-audio
 
 CC_DARWIN := g++
 CFLAGS_DARWIN := -std=c++11 
-LINKER_FLAGS_DARWIN_BUILD := $(ENGINE_PATH)/libengine.dylib $(ENGINE_PATH)/thirdparty/lib/Darwin/libsfml-graphics.dylib $(ENGINE_PATH)/thirdparty/lib/Darwin/libsfml-system.dylib $(ENGINE_PATH)/thirdparty/lib/Darwin/libsfml-window.dylib
+LINKER_FLAGS_DARWIN_BUILD := $(ENGINE_PATH)/libengine.dylib $(ENGINE_PATH)/thirdparty/lib/Darwin/libsfml-graphics.dylib $(ENGINE_PATH)/thirdparty/lib/Darwin/libsfml-system.dylib $(ENGINE_PATH)/thirdparty/lib/Darwin/libsfml-window.dylib $(ENGINE_PATH)/thirdparty/lib/Darwin/libsfml-network.dylib
  
 
 
@@ -57,14 +57,14 @@ $(ENGINE_PATH)/libengine.dylib:
 
 Darwin: $(ENGINE_PATH)/libengine.dylib
 	@$(CC_DARWIN) $(INCLUDE) $(GAME_SOURCES) $(CFLAGS_DARWIN) $(LINKER_FLAGS_DARWIN_BUILD) -o $(GAME_TITLE)
-	@install_name_tool -change @rpath/libsfml-graphics.2.5.dylib @executable_path/$(ENGINE_PATH)/thirdparty/lib/Darwin/libsfml-graphics.2.5.1.dylib $(GAME_TITLE) && install_name_tool -change @rpath/libsfml-window.2.5.dylib @executable_path/$(ENGINE_PATH)/thirdparty/lib/Darwin/libsfml-window.2.5.1.dylib $(GAME_TITLE) && install_name_tool -change @rpath/libsfml-system.2.5.dylib @executable_path/$(ENGINE_PATH)/thirdparty/lib/Darwin/libsfml-system.2.5.1.dylib $(GAME_TITLE) && install_name_tool -change libengine.dylib @executable_path/$(ENGINE_PATH)/libengine.dylib $(GAME_TITLE)
+	@install_name_tool -change @rpath/libsfml-graphics.2.5.dylib @executable_path/$(ENGINE_PATH)/thirdparty/lib/Darwin/libsfml-graphics.2.5.1.dylib $(GAME_TITLE) && install_name_tool -change @rpath/libsfml-window.2.5.dylib @executable_path/$(ENGINE_PATH)/thirdparty/lib/Darwin/libsfml-window.2.5.1.dylib $(GAME_TITLE) && install_name_tool -change @rpath/libsfml-system.2.5.dylib @executable_path/$(ENGINE_PATH)/thirdparty/lib/Darwin/libsfml-system.2.5.1.dylib $(GAME_TITLE) && install_name_tool -change libengine.dylib @executable_path/$(ENGINE_PATH)/libengine.dylib $(GAME_TITLE) && install_name_tool -change @rpath/libsfml-network.2.5.dylib @executable_path/$(ENGINE_PATH)/thirdparty/lib/Darwin/libsfml-network.2.5.1.dylib $(GAME_TITLE)
 
 
 Darwin_distribution: $(ENGINE_PATH)/libengine.dylib
 	@cp -r $(ENGINE_PATH)/thirdparty/lib/$(PLATFORM)/ out/$(PLATFORM)/$(GAME_TITLE)/libs
 	@cp $(ENGINE_PATH)/libengine.dylib out/$(PLATFORM)/$(GAME_TITLE)/libs/libengine.dylib
 	@$(CC_DARWIN) $(INCLUDE) $(GAME_SOURCES) $(CFLAGS_DARWIN) $(LINKER_FLAGS_DARWIN_BUILD) -o $(GAME_TITLE)
-	@install_name_tool -change @rpath/libsfml-graphics.2.5.dylib @executable_path/libs/libsfml-graphics.2.5.1.dylib $(GAME_TITLE) && install_name_tool -change @rpath/libsfml-window.2.5.dylib @executable_path/libs/libsfml-window.2.5.1.dylib $(GAME_TITLE) && install_name_tool -change @rpath/libsfml-system.2.5.dylib @executable_path/libs/libsfml-system.2.5.1.dylib $(GAME_TITLE) && install_name_tool -change libengine.dylib @executable_path/libs/libengine.dylib $(GAME_TITLE)
+	@install_name_tool -change @rpath/libsfml-graphics.2.5.dylib @executable_path/libs/libsfml-graphics.2.5.1.dylib $(GAME_TITLE) && install_name_tool -change @rpath/libsfml-window.2.5.dylib @executable_path/libs/libsfml-window.2.5.1.dylib $(GAME_TITLE) && install_name_tool -change @rpath/libsfml-system.2.5.dylib @executable_path/libs/libsfml-system.2.5.1.dylib $(GAME_TITLE) && install_name_tool -change libengine.dylib @executable_path/libs/libengine.dylib $(GAME_TITLE) && install_name_tool -change @rpath/libsfml-network.2.5.dylib @executable_path/$(ENGINE_PATH)/thirdparty/lib/Darwin/libsfml-network.2.5.1.dylib $(GAME_TITLE)
 
 	@mv $(GAME_TITLE) out/$(PLATFORM)/$(GAME_TITLE)/$(GAME_TITLE)
 

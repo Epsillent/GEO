@@ -3,8 +3,9 @@
 
 #include "engine.hpp"
 #include "components/particle_system.hpp"
+#include "entities/entity.hpp"
 
-class Shooter: public GameObject{
+class Shooter: public Entity {
     private:
         int shooting_speed=1;
         int health=5;
@@ -13,8 +14,9 @@ class Shooter: public GameObject{
         ParticleSystemProperties bullet_partical_sys_pr;
         float bullet_speed = 350; 
         sf::Vector2f m_coordinates;
+        sf::Vector2f m_direction;
     public:
-        Shooter(sf::Vector2f coordinates);
+        Shooter(sf::Vector2f coordinates, sf::Vector2f direction);
         void on_update(float dt)override;
 };
 

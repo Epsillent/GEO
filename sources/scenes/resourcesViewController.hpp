@@ -9,8 +9,8 @@ class ResourcesViewController: public UIController{
     private:
        
     public:  
-        TextView *left_resources;
-        TextView *right_resources;
+        TextView *left_resources_text_view;
+        TextView *right_resources_text_view;
         ResourcesViewController();
 };
 
