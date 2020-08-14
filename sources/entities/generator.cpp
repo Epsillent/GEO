@@ -10,7 +10,11 @@ Generator::Generator(float spawn_rate, Resources* resources_to_update, sf::Vecto
     m_spawn_rate = spawn_rate;
     body = component_add<Sprite2D>();
     body->set_color(sf::Color::Green);
+<<<<<<< HEAD
     body->set_size(sf::Vector2f(GeoPropeties::figure_edge, GeoPropeties::figure_edge));
+=======
+    body->set_size(sf::Vector2f(100,100));
+>>>>>>> caa5cfcb25579d0f43ab3beb76f58f7cbaf74bc9
     m_resources_to_update = resources_to_update;
     set_tag("generator");
 }   

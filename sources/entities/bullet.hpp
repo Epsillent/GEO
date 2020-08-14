@@ -15,6 +15,10 @@ class Bullet: public GameObject {
         Bullet(sf::Vector2f direction, sf::Vector2f coordinates, float speed, ParticleSystemProperties &pr_partical_system);
         void on_update(float dt)override;
         void on_collided(Trigger2D other);
+<<<<<<< HEAD
+=======
+            
+>>>>>>> caa5cfcb25579d0f43ab3beb76f58f7cbaf74bc9
 };
 
 

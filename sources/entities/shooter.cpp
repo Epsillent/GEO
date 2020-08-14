@@ -24,8 +24,27 @@ void Shooter::on_update(float dt) {
     timer += dt;
     float speed = 200;
     if(timer > 3){
+<<<<<<< HEAD
         Bullet *bullet = new Bullet(m_direction, sf::Vector2f(100,50), bullet_speed, bullet_partical_sys_pr);       
         object_introduce(bullet);        
+=======
+        sf::Vector2f bullet_direction(1, 0);
+        //Bullet *bullet = 
+       // scene()->object_introduce(new Bullet(bullet_direction, m_coordinates, bullet_speed, bullet_partical_sys_pr));    
+        //object_introduce(bullet);        
+>>>>>>> caa5cfcb25579d0f43ab3beb76f58f7cbaf74bc9
         timer -= 3;
+    }
+    if(Input::key_pressed(KeyCode::W)){
+        translate(0,-speed*dt);
+    }
+    if(Input::key_pressed(KeyCode::S)){
+        translate(0,speed*dt);
+    }
+    if(Input::key_pressed(KeyCode::D)){
+        translate(speed*dt,0);
+    }
+    if(Input::key_pressed(KeyCode::A)){
+        translate(-speed*dt,0);
     }
 }
