@@ -34,4 +34,12 @@ void LeftSelector::on_update(float dt) {
     else {
         is_mooved = false ;
     }
+
+    if(Input::key_pressed(KeyCode::R)) { 
+        m_figure_trigger = 0;
+    } else if(Input::key_pressed(KeyCode::T)) {
+        m_figure_trigger = 1;
+    } else if(Input::key_pressed(KeyCode::Y)) {
+        m_figure_trigger = 2;
+    }
 }

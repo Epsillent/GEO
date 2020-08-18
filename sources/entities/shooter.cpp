@@ -3,7 +3,7 @@
 #include "components/sprite_2d.hpp"
 #include "const.hpp"
 
-Shooter::Shooter(sf::Vector2f coordinates, sf::Vector2f direction): Entity(GeoPropeties::shooter_health){
+Shooter::Shooter(sf::Vector2f coordinates, sf::Vector2f direction, Side side): Entity(GeoPropeties::shooter_health){
     translate(coordinates);
     m_body = component_add<Sprite2D>();
     m_body->set_color(sf::Color::Blue);
@@ -17,34 +17,17 @@ Shooter::Shooter(sf::Vector2f coordinates, sf::Vector2f direction): Entity(GeoPr
 
     m_coordinates = coordinates;
     m_direction = direction;
+    m_side = side;
     set_tag("shooter");
 }
 
 void Shooter::on_update(float dt) {
     timer += dt;
     float speed = 200;
-    if(timer > 3){
-<<<<<<< HEAD
-        Bullet *bullet = new Bullet(m_direction, sf::Vector2f(100,50), bullet_speed, bullet_partical_sys_pr);       
+    if(timer > 3) {
+        Bullet *bullet = new Bullet(m_direction, sf::Vector2f(50,50), bullet_speed, bullet_partical_sys_pr);   
+        bullet->m_side = m_side;   
         object_introduce(bullet);        
-=======
-        sf::Vector2f bullet_direction(1, 0);
-        //Bullet *bullet = 
-       // scene()->object_introduce(new Bullet(bullet_direction, m_coordinates, bullet_speed, bullet_partical_sys_pr));    
-        //object_introduce(bullet);        
->>>>>>> caa5cfcb25579d0f43ab3beb76f58f7cbaf74bc9
         timer -= 3;
-    }
-    if(Input::key_pressed(KeyCode::W)){
-        translate(0,-speed*dt);
-    }
-    if(Input::key_pressed(KeyCode::S)){
-        translate(0,speed*dt);
-    }
-    if(Input::key_pressed(KeyCode::D)){
-        translate(speed*dt,0);
-    }
-    if(Input::key_pressed(KeyCode::A)){
-        translate(-speed*dt,0);
     }
 }

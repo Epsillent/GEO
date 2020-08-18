@@ -14,8 +14,8 @@ class Resources: public GameObject {
     public:
         Resources(TextView *text_view);
         void on_update(float dt)override;
-        void on_init()override;
         void resources_increase(int count);
+        void resources_decrease(int count);
         int get_resources();
 };
 

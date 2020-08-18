@@ -2,14 +2,14 @@ ENGINE_PATH := ../../engine
 INCLUDE := -I$(ENGINE_PATH)/sources/ -I$(ENGINE_PATH)/thirdparty/include -I./sources
 
 
-CC_LINUX := g++
-CFLAGS_LINUX := -Werror -std=c++17
+CC_LINUX := clang
+CFLAGS_LINUX := -Werror -std=c++11
 LINKER_FLAGS_LINUX := -lX11 -lstdc++ -lm -lpthread
 LINKER_FLAGS_LINUX_BUILD := $(LINKER_FLAGS_LINUX) -Wl,-R$(ENGINE_PATH)/thirdparty/lib/Linux $(ENGINE_PATH)/libengine.so $(ENGINE_PATH)/thirdparty/lib/Linux/libsfml-audio.so $(ENGINE_PATH)/thirdparty/lib/Linux/libsfml-window.so $(ENGINE_PATH)/thirdparty/lib/Linux/libsfml-graphics.so $(ENGINE_PATH)/thirdparty/lib/Linux/libsfml-system.so $(ENGINE_PATH)/thirdparty/lib/Linux/libsfml-network.so
 LINKER_FLAGS_LINUX_DISTRIBUTION := $(LINKER_FLAGS_LINUX) -Llibs -Wl,-R./libs -lengine -lsfml-window -lsfml-graphics -lsfml-system -lsfml-network -lsfml-audio
 
 CC_DARWIN := g++
-CFLAGS_DARWIN := -std=c++11 
+CFLAGS_DARWIN := -std=c++11 -headerpad_max_install_names
 LINKER_FLAGS_DARWIN_BUILD := $(ENGINE_PATH)/libengine.dylib $(ENGINE_PATH)/thirdparty/lib/Darwin/libsfml-graphics.dylib $(ENGINE_PATH)/thirdparty/lib/Darwin/libsfml-system.dylib $(ENGINE_PATH)/thirdparty/lib/Darwin/libsfml-window.dylib $(ENGINE_PATH)/thirdparty/lib/Darwin/libsfml-network.dylib
  
 

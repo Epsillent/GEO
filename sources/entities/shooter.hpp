@@ -16,8 +16,8 @@ class Shooter: public Entity {
         sf::Vector2f m_coordinates;
         sf::Vector2f m_direction;
     public:
-        Shooter(sf::Vector2f coordinates, sf::Vector2f direction);
-        void on_update(float dt)override;
+        Shooter(sf::Vector2f coordinates, sf::Vector2f direction, Side side);
+        void on_update(float dt) override;
 };
 
 #endif

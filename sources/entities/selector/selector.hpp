@@ -7,9 +7,9 @@
 class Selector: public GameObject {
     private:
         Sprite2D *m_body;
-        
     public:
         sf::Vector2f m_coorinates;
+        int m_figure_trigger=0;
         Selector(sf::Color color, sf::Vector2f size, sf::Vector2f coordinates);
         void on_update(float dt);
 };

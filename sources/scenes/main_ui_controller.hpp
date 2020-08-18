@@ -5,13 +5,14 @@
 #include "ui/ui.hpp"
 #include "ui/ui_controller.hpp"
 
-class ResourcesViewController: public UIController{
-    private:
-       
+class MainUIController: public UIController{       
     public:  
         TextView *left_resources_text_view;
         TextView *right_resources_text_view;
-        ResourcesViewController();
+        
+        TextView *left_health_text_view;
+        TextView *right_health_text_view;
+        MainUIController();
 };
 
 #endif

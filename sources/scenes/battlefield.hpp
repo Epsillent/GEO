@@ -7,9 +7,20 @@
 #include "utils/assets_manager.hpp"
 #include <vector>
 
+#include "entities/selector/left_selector.hpp"
+#include "entities/selector/right_selector.hpp"
+#include "entities/resources.hpp"
+
 class Battlefield: public BaseScene {
+    private:
+        RightSelector *m_right_selector;
+        LeftSelector *m_left_selector;
+        bool is_pressed=false;
+        bool is_pressed_left=false;
+        Resources *m_left_resources;
+        Resources *m_right_resources;
     public:
-        void on_init()override;
+        void on_introduce()override;
         void on_update(float dt)override;
 };
 

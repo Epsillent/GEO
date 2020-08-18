@@ -9,7 +9,8 @@ int main() {
     props.mode = sf::VideoMode(1480, 820);
     props.window_title = "Geo";
     props.frame_rate_limit = 60;
-    engine->init(props);
+    //engine->init(props);
+    engine->initialize(props);
     engine->set_entry_scene(new Battlefield, "Battlefield");
     engine->start();
 }

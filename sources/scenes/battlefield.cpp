@@ -5,35 +5,92 @@
 #include "entities/resources.hpp"
 #include "entities/selector/left_selector.hpp"
 #include "entities/selector/right_selector.hpp"
+#include "scenes/main_ui_controller.hpp"
+#include "entities/base.hpp"
 
 #include "engine.hpp"
-#include "scenes/resourcesViewController.hpp"
+#include "servers/display_server.hpp"
+#include "const.hpp"
 
-void Battlefield::on_init() {
-    ResourcesViewController *resources_view_controller = new ResourcesViewController();
-    Engine::get_singleton()->set_ui_controller(resources_view_controller);
-<<<<<<< HEAD
-   
-    Resources *left_resources = new Resources(resources_view_controller->left_resources_text_view);
-    Resources *right_resources = new Resources(resources_view_controller->right_resources_text_view);
-   
-    object_introduce(new LeftSelector());
-    object_introduce(new RightSelector());
-    object_introduce(new Shooter(sf::Vector2f(100, 100), sf::Vector2f(1,  0)) );
-    object_introduce(new Generator(1, left_resources, sf::Vector2f(800, 100)) );
-    object_introduce(new Protector(sf::Vector2f(500, 100)));
-=======
-    Resources *left_resources = new Resources(resources_view_controller->left_resources);
-    Resources *right_resources = new Resources(resources_view_controller->right_resources);
+void Battlefield::on_introduce() {
 
-    //object_introduce(new Generator(1, left_resources, sf::Vector2f(300, 300)) );
-    object_introduce(new Generator(1, left_resources, sf::Vector2f(600, 100)) );
-    //object_introduce(new Protector(sf::Vector2f(800,600)));
->>>>>>> caa5cfcb25579d0f43ab3beb76f58f7cbaf74bc9
+    MainUIController *main_ui_controller = new MainUIController();
+    set_ui_controller( main_ui_controller );
+   
+    Resources *left_resources = new Resources(main_ui_controller->left_resources_text_view);
+    Resources *right_resources = new Resources(main_ui_controller->right_resources_text_view);
+
+    left_resources->resources_increase(3);
+    right_resources->resources_increase(3);
+
+    m_right_selector = new RightSelector();
+    m_left_selector = new LeftSelector();
+
+    m_left_resources = left_resources;
+    m_right_resources = right_resources;
+
+    object_introduce(m_right_selector);
+    object_introduce(m_left_selector);
+
+    object_introduce(new Base(sf::Vector2f(DisplayServer::window_size().x-150, DisplayServer::window_size().y/2-160), main_ui_controller->left_health_text_view, Side::Right ) );   
+    object_introduce( new Base(  sf::Vector2f(30,DisplayServer::window_size().y/2-160) , main_ui_controller->right_health_text_view , Side::Left  )  );
 }
 
 void Battlefield::on_update(float dt) {
+    
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-        Engine::get_singleton()->stop();    
+        Engine::get_singleton()->finalize();    
+    }
+
+    if(Input::key_pressed(KeyCode::Enter)) {  
+        if(m_right_selector->m_figure_trigger == 0 && m_right_resources->get_resources() >= GeoPropeties::generator_price ) {
+            if(!is_pressed) {
+                is_pressed = true;
+                m_right_resources->resources_decrease(GeoPropeties::generator_price);
+                object_introduce( new Generator( 1, m_right_resources, m_right_selector->global_position(), Side::Right ) );
+            }
+        } else if (m_right_selector->m_figure_trigger == 1 && m_right_resources->get_resources() >= GeoPropeties::generator_price ) {
+            if(!is_pressed) {
+                object_introduce( new Shooter( m_right_selector->global_position() , sf::Vector2f(-1,0), Side::Right ) );
+                m_right_resources->resources_decrease(GeoPropeties::generator_price);
+                is_pressed = true;
+            }
+        } else if(m_right_selector->m_figure_trigger == 2 && m_right_resources->get_resources() >= GeoPropeties::generator_price ) {
+            if(!is_pressed) {
+                object_introduce( new Protector( m_right_selector->global_position(), Side::Right ) );
+                m_right_resources->resources_decrease(GeoPropeties::generator_price);
+                is_pressed = true;
+            }
+        } else {
+            is_pressed = false;
+        }
+    } else {
+        is_pressed = false;
+    }
+
+    if(Input::key_pressed(KeyCode::Space)) {  
+        if( m_left_selector->m_figure_trigger == 0 && m_left_resources->get_resources() >= GeoPropeties::generator_price ) {
+            if(!is_pressed_left) {
+                is_pressed_left = true;
+                m_left_resources->resources_decrease(GeoPropeties::generator_price);
+                object_introduce( new Generator( 1, m_left_resources, m_left_selector->global_position(), Side::Left ) );
+            }
+        } else if (m_left_selector->m_figure_trigger == 1 && m_left_resources->get_resources() >= GeoPropeties::shooter_price ) {
+            if(!is_pressed_left) {
+                object_introduce( new Shooter( m_left_selector->global_position() , sf::Vector2f(1,0), Side::Left ) );
+                m_left_resources->resources_decrease(GeoPropeties::shooter_price);
+                is_pressed_left = true;
+            }
+        } else if(m_left_selector->m_figure_trigger == 2 && m_left_resources->get_resources() >= GeoPropeties::shooter_price ) {
+            if(!is_pressed_left) {
+                object_introduce( new Protector( m_left_selector->global_position(), Side::Left ) );
+                m_left_resources->resources_decrease(GeoPropeties::protector_price);
+                is_pressed_left = true;
+            }
+        } else {
+            is_pressed_left = false;
+        }
+    } else {
+        is_pressed_left = false;
     }
 }
