@@ -51,7 +51,7 @@ void Battlefield::on_introduce() {
 void Battlefield::on_update(float dt) {
     
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-        Engine::get_singleton()->finalize();    
+        Engine::get_singleton()->stop();    
     }
 
     if(Input::key_pressed(KeyCode::Enter)) {  
