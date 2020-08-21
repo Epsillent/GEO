@@ -7,7 +7,7 @@
 #include "entities/selector/right_selector.hpp"
 #include "scenes/main_ui_controller.hpp"
 #include "entities/base.hpp"
-
+#include "string.h"
 #include "engine.hpp"
 #include "servers/display_server.hpp"
 #include "const.hpp"
@@ -19,8 +19,10 @@ Background::Background(){
 }
 
 void Battlefield::on_introduce() {
+    memset(field,0,sizeof(field));
 
     GeoPropeties::texture_pack = new TexturePack("resources/capitalist/");
+    object_introduce(new Background());
 
     MainUIController *main_ui_controller = new MainUIController();
     set_ui_controller( main_ui_controller );
@@ -32,7 +34,6 @@ void Battlefield::on_introduce() {
     right_resources->resources_increase(1000);
 
 
-    object_introduce(new Background());
 
     m_right_selector = new RightSelector();
     m_left_selector = new LeftSelector();

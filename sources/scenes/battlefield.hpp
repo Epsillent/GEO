@@ -25,6 +25,9 @@ class Battlefield: public BaseScene {
         bool is_pressed_left=false;
         Resources *m_left_resources;
         Resources *m_right_resources;
+        
+        uint8 field[5][11];
+        friend class Selector;
     public:
         void on_introduce()override;
         void on_update(float dt)override;
