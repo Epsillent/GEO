@@ -1,3 +1,5 @@
+#include "utils/texture_pack.hpp"
+
 struct GeoPropeties {
     static const int generator_health;
     static const int shooter_health;
@@ -11,5 +13,6 @@ struct GeoPropeties {
     static const int generator_price;
     static const int shooter_price;
     static const int protector_price;
-    
+    static const sf::Vector2f offset_in_selector;
+    static TexturePack *texture_pack;
 };

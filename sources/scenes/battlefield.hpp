@@ -11,6 +11,12 @@
 #include "entities/selector/right_selector.hpp"
 #include "entities/resources.hpp"
 
+
+class Background: public GameObject{
+public:
+    Background();
+};
+
 class Battlefield: public BaseScene {
     private:
         RightSelector *m_right_selector;

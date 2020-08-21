@@ -1,6 +1,6 @@
 #include "entities/selector/left_selector.hpp"
 
-LeftSelector::LeftSelector(): Selector(sf::Color::Red, sf::Vector2f(120,120), sf::Vector2f(200, 200) ) {
+LeftSelector::LeftSelector(): Selector(sf::Color::Blue, sf::Vector2f(120,120), sf::Vector2f(80, 60) ,Side::Left) {
 
 }
 

@@ -1,6 +1,6 @@
 #include "entities/selector/right_selector.hpp"
 
-RightSelector::RightSelector(): Selector(sf::Color::Blue, sf::Vector2f(120,120), sf::Vector2f(200, 200) ) {
+RightSelector::RightSelector(): Selector(sf::Color::Red, sf::Vector2f(120,120), sf::Vector2f(80, 60) ,Side::Right) {
 
 }
 

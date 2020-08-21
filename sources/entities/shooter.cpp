@@ -3,15 +3,13 @@
 #include "components/sprite_2d.hpp"
 #include "const.hpp"
 
-Shooter::Shooter(sf::Vector2f coordinates, sf::Vector2f direction, Side side): Entity(GeoPropeties::shooter_health){
+Shooter::Shooter(sf::Vector2f coordinates, sf::Vector2f direction, Side side): 
+    Entity(GeoPropeties::shooter_health)
+{
+    m_side = side;
     translate(coordinates);
     m_body = component_add<Sprite2D>();
-    m_side = side;
-    if(m_side == Side::Left){
-        m_body->set_color(sf::Color::Blue);    
-    } else{
-        m_body->set_color(sf::Color::Red);    
-    }
+    m_body->set_texture(&GeoPropeties::texture_pack->shooter[side]);
     
     
     m_body->set_size(sf::Vector2f(GeoPropeties::figure_edge, GeoPropeties::figure_edge));

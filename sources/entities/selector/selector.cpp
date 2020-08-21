@@ -1,14 +1,11 @@
 #include "entities/selector/selector.hpp"
-
-Selector::Selector(sf::Color color, sf::Vector2f size, sf::Vector2f coordinates) {
+#include "const.hpp"
+Selector::Selector(sf::Color color, sf::Vector2f size, sf::Vector2f coordinates, Side side) {
     translate(coordinates);
     m_coorinates = coordinates;
     m_body = component_add<Sprite2D>();
-    sf::RectangleShape &body = m_body->shape();
-    body.setOutlineColor(color);
-    body.setFillColor(sf::Color::Transparent);
-    body.setOutlineThickness(10);
-    body.setSize(size);
+    m_body->set_size(size);
+    m_body->set_texture(&GeoPropeties::texture_pack->selector[side]);
 }
 
 void Selector::on_update(float dt){

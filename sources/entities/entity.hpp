@@ -6,8 +6,8 @@
 #include "ui/ui.hpp"
 
 enum Side: uint8 {
-    Left,
-    Right
+    Left = 0,
+    Right = 1
 };
 
 class Entity: public GameObject {
