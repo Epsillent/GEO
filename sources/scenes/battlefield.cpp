@@ -20,8 +20,8 @@ void Battlefield::on_introduce() {
     Resources *left_resources = new Resources(main_ui_controller->left_resources_text_view);
     Resources *right_resources = new Resources(main_ui_controller->right_resources_text_view);
 
-    left_resources->resources_increase(3);
-    right_resources->resources_increase(3);
+    left_resources->resources_increase(1000);
+    right_resources->resources_increase(1000);
 
     m_right_selector = new RightSelector();
     m_left_selector = new LeftSelector();

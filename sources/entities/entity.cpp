@@ -11,6 +11,7 @@ Entity::Entity(int health) {
       pr_trigger_2d.callback = CALLBACK(&Entity::on_collided);
       pr_trigger_2d.size = Trigger2D::size(GeoPropeties::figure_edge, GeoPropeties::figure_edge);
       m_c_trigger_2d = component_add<Trigger2D>(pr_trigger_2d);
+      std::cout << m_side;
 }
 
 void Entity::make_damage(int damage) {

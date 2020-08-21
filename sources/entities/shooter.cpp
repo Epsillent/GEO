@@ -6,7 +6,14 @@
 Shooter::Shooter(sf::Vector2f coordinates, sf::Vector2f direction, Side side): Entity(GeoPropeties::shooter_health){
     translate(coordinates);
     m_body = component_add<Sprite2D>();
-    m_body->set_color(sf::Color::Blue);
+    m_side = side;
+    if(m_side == Side::Left){
+        m_body->set_color(sf::Color::Blue);    
+    } else{
+        m_body->set_color(sf::Color::Red);    
+    }
+    
+    
     m_body->set_size(sf::Vector2f(GeoPropeties::figure_edge, GeoPropeties::figure_edge));
     
     bullet_partical_sys_pr.color_begin = sf::Color::Red;
@@ -17,7 +24,7 @@ Shooter::Shooter(sf::Vector2f coordinates, sf::Vector2f direction, Side side): E
 
     m_coordinates = coordinates;
     m_direction = direction;
-    m_side = side;
+    
     set_tag("shooter");
 }
 
