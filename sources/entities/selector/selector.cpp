@@ -1,5 +1,4 @@
 #include "entities/selector/selector.hpp"
-#include "const.hpp"
 Selector::Selector(sf::Color color, sf::Vector2f size, sf::Vector2f coordinates, Side side) {
     translate(coordinates);
     m_coorinates = coordinates;

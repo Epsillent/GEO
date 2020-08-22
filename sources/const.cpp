@@ -12,6 +12,10 @@ const int GeoPropeties::base_width  = 100;
 const int GeoPropeties::generator_price = 3;
 const int GeoPropeties::shooter_price   = 3;
 const int GeoPropeties::protector_price = 3;
+
+const sf::Vector2f GeoPropeties::cell_size(100,100);
+
 const sf::Vector2f GeoPropeties::offset_in_selector(10,5);
+const sf::Vector2f GeoPropeties::grid_offset(80,60);
 
 TexturePack *GeoPropeties::texture_pack = nullptr;

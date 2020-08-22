@@ -1,3 +1,5 @@
+#ifndef CONST_H
+#define CONST_H
 #include "utils/texture_pack.hpp"
 
 struct GeoPropeties {
@@ -13,6 +15,12 @@ struct GeoPropeties {
     static const int generator_price;
     static const int shooter_price;
     static const int protector_price;
+
+    static const sf::Vector2f cell_size;
+
     static const sf::Vector2f offset_in_selector;
+    static const sf::Vector2f grid_offset;
     static TexturePack *texture_pack;
 };
+
+#endif

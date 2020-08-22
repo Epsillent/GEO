@@ -3,7 +3,7 @@
 #include "entities/entity.hpp"
 #include "engine.hpp"
 #include "components/sprite_2d.hpp"
-
+#include "const.hpp"
 class Selector: public GameObject {
     private:
         Sprite2D *m_body;

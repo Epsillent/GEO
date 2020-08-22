@@ -1,6 +1,6 @@
 #include "entities/selector/left_selector.hpp"
 
-LeftSelector::LeftSelector(): Selector(sf::Color::Blue, sf::Vector2f(120,120), sf::Vector2f(80, 60) ,Side::Left) {
+LeftSelector::LeftSelector(): Selector(sf::Color::Blue, sf::Vector2f(120,120), GeoPropeties::grid_offset ,Side::Left) {
 
 }
 
