@@ -21,7 +21,13 @@ Background::Background(){
 
 void Battlefield::on_introduce() {
     memset(field,0,sizeof(field));
-    connect(Host("192.168.0.62",25565));
+    std::cout << "Enter server ip:";
+    std::string ip;
+    std::cin >> ip;
+    std::cout << "Enter server port:";
+    uint16 port;
+    std::cin >> port;
+    connect(Host(ip,port));
     
     GeoPropeties::texture_pack = new TexturePack("resources/capitalist/");
     object_introduce(new Background());
