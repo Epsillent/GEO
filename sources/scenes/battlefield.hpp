@@ -17,7 +17,7 @@ public:
 
 class Battlefield: public NetworkScene {
     private:
-        bool game_started = false;
+        static bool started;
         Resources *m_left_resources;
         Resources *m_right_resources;
         

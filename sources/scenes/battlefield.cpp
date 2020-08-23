@@ -11,6 +11,8 @@
 #include "servers/display_server.hpp"
 #include "const.hpp"
 
+bool Battlefield::started = false;
+
 Background::Background(){
     Sprite2D *sprite = component_add<Sprite2D>();
     sprite->set_size(DisplayServer::window_size().x,DisplayServer::window_size().y);
@@ -35,6 +37,12 @@ void Battlefield::on_introduce() {
     LocalSelector *sel = new LocalSelector;
     sel->translate(GeoPropeties::grid_offset);
     network_object_introduce(sel);
+
+    Info("Waiting for opponent to connect...");
+    while(!started){
+        fetch();
+    }
+    Info("Game started");
 
     //object_introduce(new Base(sf::Vector2f(DisplayServer::window_size().x-150, DisplayServer::window_size().y/2-160), main_ui_controller->left_health_text_view, Side::Right ) );   
     //object_introduce( new Base(  sf::Vector2f(30,DisplayServer::window_size().y/2-160) , main_ui_controller->right_health_text_view , Side::Left  )  );
