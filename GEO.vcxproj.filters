@@ -67,6 +67,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="sources\const.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="sources\entities\selector\player.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -104,9 +107,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sources\utils\texture_pack.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\const.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
