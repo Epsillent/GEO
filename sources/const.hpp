@@ -17,6 +17,8 @@ struct GeoPropeties {
     static const int protector_price;
 
     static const sf::Vector2f cell_size;
+    static const sf::Vector2f selector_size;
+    static const float selector_move_delay;
 
     static const sf::Vector2f offset_in_selector;
     static const sf::Vector2f grid_offset;

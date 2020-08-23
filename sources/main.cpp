@@ -1,8 +1,10 @@
 #include "engine.hpp"
 #include "scenes/battlefield.hpp"
 #include "scenes/main_menu.hpp"
-
+#include "entities/selector/selector.hpp"
 int main() {
+    NetworkObjectsDB::register_object_representation<LocalSelector,RemoteSelector>();
+    
     Engine *engine = new Engine;
     EngineProperties props;
     props.show_fps = true;

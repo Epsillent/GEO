@@ -10,6 +10,7 @@ enum Side: uint8 {
     Right = 1
 };
 
+
 class Entity: public GameObject {
     private:
         TextView *m_health_text_view=nullptr;
