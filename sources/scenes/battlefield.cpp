@@ -10,7 +10,7 @@
 #include "engine.hpp"
 #include "servers/display_server.hpp"
 #include "const.hpp"
-
+#include "core/math/random.hpp"
 bool Battlefield::started = false;
 
 Background::Background(){
@@ -20,6 +20,7 @@ Background::Background(){
 }
 
 void Battlefield::on_introduce() {
+    sf::Clock time;
     memset(field,0,sizeof(field));
     std::cout << "Enter server ip:";
     std::string ip;
@@ -40,6 +41,7 @@ void Battlefield::on_introduce() {
 
     m_left_resources->resources_increase(1000);
     m_right_resources->resources_increase(1000);
+    Random::seed(time.getElapsedTime().asMicroseconds());
     LocalSelector *sel = new LocalSelector;
     sel->translate(GeoPropeties::grid_offset);
     network_object_introduce(sel);

@@ -2,8 +2,10 @@
 #include "scenes/battlefield.hpp"
 #include "scenes/main_menu.hpp"
 #include "entities/selector/selector.hpp"
+#include "core/math/random.hpp"
 int main() {
     NetworkObjectsDB::register_object_representation<LocalSelector,RemoteSelector>();
+    
     
     Engine *engine = new Engine;
     EngineProperties props;
@@ -14,6 +16,7 @@ int main() {
     //engine->init(props);
     engine->initialize(props);
     engine->set_entry_scene(new Battlefield, "Battlefield");
+    Random::seed(time(0));
     engine->start();
     engine->finalize();
 }

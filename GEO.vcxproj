@@ -19,12 +19,42 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="sources\const.cpp" />
+    <ClCompile Include="sources\entities\base.cpp" />
+    <ClCompile Include="sources\entities\bullet.cpp" />
+    <ClCompile Include="sources\entities\entity.cpp" />
+    <ClCompile Include="sources\entities\generator.cpp" />
+    <ClCompile Include="sources\entities\player.cpp" />
+    <ClCompile Include="sources\entities\protector.cpp" />
+    <ClCompile Include="sources\entities\resources.cpp" />
+    <ClCompile Include="sources\entities\selector\selector.cpp" />
+    <ClCompile Include="sources\entities\shooter.cpp" />
     <ClCompile Include="sources\main.cpp" />
+    <ClCompile Include="sources\scenes\battlefield.cpp" />
+    <ClCompile Include="sources\scenes\main_menu.cpp" />
+    <ClCompile Include="sources\scenes\main_ui_controller.cpp" />
+    <ClCompile Include="sources\utils\texture_pack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="Makefile" />
     <None Include="ProjectConfig.mk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="sources\const.hpp" />
+    <ClInclude Include="sources\entities\base.hpp" />
+    <ClInclude Include="sources\entities\bullet.hpp" />
+    <ClInclude Include="sources\entities\entity.hpp" />
+    <ClInclude Include="sources\entities\generator.hpp" />
+    <ClInclude Include="sources\entities\protector.hpp" />
+    <ClInclude Include="sources\entities\resources.hpp" />
+    <ClInclude Include="sources\entities\selector\player.hpp" />
+    <ClInclude Include="sources\entities\selector\selector.hpp" />
+    <ClInclude Include="sources\entities\shooter.hpp" />
+    <ClInclude Include="sources\scenes\battlefield.hpp" />
+    <ClInclude Include="sources\scenes\main_menu.hpp" />
+    <ClInclude Include="sources\scenes\main_ui_controller.hpp" />
+    <ClInclude Include="sources\utils\texture_pack.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
