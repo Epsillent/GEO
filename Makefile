@@ -44,7 +44,8 @@ distribution:
 
 	$(info [INFO]: compiling $(GAME_TITLE) project)
 	@$(MAKE) $(PLATFORM)_distribution
-
+server:
+	@$(MAKE) $(PLATFORM)_server
 
 clean:
 	$(info [INFO]: cleaning out/)
@@ -67,6 +68,10 @@ Darwin_distribution: $(ENGINE_PATH)/libengine.dylib
 	@install_name_tool -change @rpath/libsfml-graphics.2.5.dylib @executable_path/libs/libsfml-graphics.2.5.1.dylib $(GAME_TITLE) && install_name_tool -change @rpath/libsfml-window.2.5.dylib @executable_path/libs/libsfml-window.2.5.1.dylib $(GAME_TITLE) && install_name_tool -change @rpath/libsfml-system.2.5.dylib @executable_path/libs/libsfml-system.2.5.1.dylib $(GAME_TITLE) && install_name_tool -change libengine.dylib @executable_path/libs/libengine.dylib $(GAME_TITLE) && install_name_tool -change @rpath/libsfml-network.2.5.dylib @executable_path/$(ENGINE_PATH)/thirdparty/lib/Darwin/libsfml-network.2.5.1.dylib $(GAME_TITLE)
 
 	@mv $(GAME_TITLE) out/$(PLATFORM)/$(GAME_TITLE)/$(GAME_TITLE)
+Darwin_server: $(ENGINE_PATH)/libengine.dylib
+	@$(CC_DARWIN) $(INCLUDE) server_sources/main.cpp $(CFLAGS_DARWIN) $(LINKER_FLAGS_DARWIN_BUILD) -o Server-$(GAME_TITLE)
+	@install_name_tool -change @rpath/libsfml-graphics.2.5.dylib @executable_path/$(ENGINE_PATH)/thirdparty/lib/Darwin/libsfml-graphics.2.5.1.dylib $(GAME_TITLE) && install_name_tool -change @rpath/libsfml-window.2.5.dylib @executable_path/$(ENGINE_PATH)/thirdparty/lib/Darwin/libsfml-window.2.5.1.dylib $(GAME_TITLE) && install_name_tool -change @rpath/libsfml-system.2.5.dylib @executable_path/$(ENGINE_PATH)/thirdparty/lib/Darwin/libsfml-system.2.5.1.dylib $(GAME_TITLE) && install_name_tool -change libengine.dylib @executable_path/$(ENGINE_PATH)/libengine.dylib $(GAME_TITLE) && install_name_tool -change @rpath/libsfml-network.2.5.dylib @executable_path/$(ENGINE_PATH)/thirdparty/lib/Darwin/libsfml-network.2.5.1.dylib $(GAME_TITLE)
+
 
 $(ENGINE_PATH)/libengine.so:
 	$(info [INFO]: engine was not compiled)
@@ -83,5 +88,7 @@ Linux_distribution: $(ENGINE_PATH)/libengine.so
 	@cp $(ENGINE_PATH)/libengine.so out/$(PLATFORM)/$(GAME_TITLE)/libs/libengine.so
 	(cd out/$(PLATFORM)/$(GAME_TITLE); $(CC_LINUX) -I../../../sources/ -I../../../$(ENGINE_PATH)/thirdparty/include -I../../../$(ENGINE_PATH)/sources $(subst ./,../../../,$(GAME_SOURCES)) $(CFLAGS_LINUX) $(LINKER_FLAGS_LINUX_DISTRIBUTION) -o $(OUT_NAME))
 	
+Linux_server: $(ENGINE_PATH)/libengine.so
+	@$(CC_LINUX) $(INCLUDE) server_sources/main.cpp $(CFLAGS_LINUX) $(LINKER_FLAGS_LINUX_BUILD) -o Server-$(OUT_NAME).out
 
 	
