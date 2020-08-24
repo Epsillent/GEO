@@ -18,7 +18,7 @@ Background::Background(){
     sprite->set_size(DisplayServer::window_size().x,DisplayServer::window_size().y);
     sprite->set_texture(&GeoPropeties::texture_pack->battlefield);
 }
-
+#define CUSTOM
 void Battlefield::on_introduce() {
     sf::Clock time;
     memset(field,0,sizeof(field));
@@ -39,8 +39,8 @@ void Battlefield::on_introduce() {
     m_left_resources = (Resources*)object_introduce(new Resources(main_ui_controller->left_resources_text_view));
     m_right_resources = (Resources*)object_introduce(new Resources(main_ui_controller->right_resources_text_view));
 
-    m_left_resources->resources_increase(1000);
-    m_right_resources->resources_increase(1000);
+    m_left_resources->resources_increase(3);
+    m_right_resources->resources_increase(3);
     Random::seed(time.getElapsedTime().asMicroseconds());
     LocalSelector *sel = new LocalSelector;
     sel->translate(GeoPropeties::grid_offset);
