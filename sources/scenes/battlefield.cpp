@@ -42,24 +42,19 @@ void Battlefield::on_introduce() {
     MainUIController *main_ui_controller = new MainUIController();
     set_ui_controller( main_ui_controller );
    
-    //m_left_resources = (Resources*)object_introduce(new Resources(main_ui_controller->left_resources_text_view));
-    //m_right_resources = (Resources*)object_introduce(new Resources(main_ui_controller->right_resources_text_view));
     m_right_resources = new Resources(main_ui_controller->right_resources_text_view);
     m_left_resources = new Resources(main_ui_controller->left_resources_text_view);
 
     m_left_resources->resources_increase(3);
     m_right_resources->resources_increase(3);
 
-    for(int i = 1; i<=3; i++) {
-        
-    }
-    object_introduce( new Base(sf::Vector2f(0, 165), main_ui_controller->right_health_text_view , Side::Left ));                
-    object_introduce( new Base(sf::Vector2f(0, 265), main_ui_controller->right_health_text_view , Side::Left ));            
-    object_introduce( new Base(sf::Vector2f(0, 365), main_ui_controller->right_health_text_view , Side::Left ));  
+    object_introduce( new Base(sf::Vector2f(0, 165), main_ui_controller->left_health_text_view , Side::Left ));                
+    object_introduce( new Base(sf::Vector2f(0, 265), main_ui_controller->left_health_text_view , Side::Left ));            
+    object_introduce( new Base(sf::Vector2f(0, 365), main_ui_controller->left_health_text_view , Side::Left ));  
 
-    // object_introduce( new Base(sf::Vector2f(DisplayServer::window_size().x-100, 165), main_ui_controller->right_health_text_view , Side::Left ));                
-    // object_introduce( new Base(sf::Vector2f(DisplayServer::window_size().x-100, 265), main_ui_controller->right_health_text_view , Side::Left ));            
-    // object_introduce( new Base(sf::Vector2f(DisplayServer::window_size().x-100, 365), main_ui_controller->right_health_text_view , Side::Left ));             
+    object_introduce( new Base(sf::Vector2f(DisplayServer::window_size().x-100, 165), main_ui_controller->right_health_text_view , Side::Right ));                
+    object_introduce( new Base(sf::Vector2f(DisplayServer::window_size().x-100, 265), main_ui_controller->right_health_text_view , Side::Right ));            
+    object_introduce( new Base(sf::Vector2f(DisplayServer::window_size().x-100, 365), main_ui_controller->right_health_text_view , Side::Right ));             
 
     Random::seed(time.getElapsedTime().asMicroseconds());
     LocalSelector *sel = new LocalSelector;
