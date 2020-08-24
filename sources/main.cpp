@@ -6,7 +6,7 @@
 int main() {
     NetworkObjectsDB::register_object_representation<LocalSelector,RemoteSelector>();
     
-    
+
     Engine *engine = new Engine;
     EngineProperties props;
     props.show_fps = true;
@@ -15,6 +15,7 @@ int main() {
     props.frame_rate_limit = 60;
     //engine->init(props);
     engine->initialize(props);
+    GeoPropeties::texture_pack = new TexturePack("resources/capitalist/");
     engine->set_entry_scene(new MainMenu, "MainMenu");
     Random::seed(time(0));
     engine->start();
