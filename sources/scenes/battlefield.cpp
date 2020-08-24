@@ -11,6 +11,7 @@
 #include "servers/display_server.hpp"
 #include "const.hpp"
 #include "core/math/random.hpp"
+#include "server.hpp"
 // REMOVE THIS IN REALESE BUILD
 #define TEST
 
@@ -24,19 +25,35 @@ Background::Background() {
     sprite->set_size(DisplayServer::window_size().x,DisplayServer::window_size().y);
     sprite->set_texture(&GeoPropeties::texture_pack->battlefield);
 }
+
+Battlefield::Battlefield():
+    autoconnect(false)
+{}
+
+Battlefield::Battlefield(const Host &host):
+    autoconnect(true),
+    localhost(host)
+{
+
+}
 void Battlefield::on_introduce() {
     sf::Clock time;
     memset(field,0,sizeof(field));
-#ifndef TEST
-    std::cout << "Enter server ip:";
-    std::string ip;
-    std::cin >> ip;
-    std::cout << "Enter server port:";
-    uint16 port;
-    std::cin >> port;
-    connect(Host(ip,port));
-#endif
-    GeoPropeties::texture_pack = new TexturePack("resources/capitalist/");
+    if(autoconnect){
+        while(!server_started)
+        {
+            ;
+        }
+        connect(localhost);
+    }else{
+        std::cout << "Enter server ip:";
+        std::string ip;
+        std::cin >> ip;
+        std::cout << "Enter server port:";
+        uint16 port;
+        std::cin >> port;
+        connect(Host(ip,port));
+    }
     object_introduce(new Background());
 
     MainUIController *main_ui_controller = new MainUIController();
@@ -61,13 +78,12 @@ void Battlefield::on_introduce() {
     sel->translate(GeoPropeties::grid_offset);
     network_object_introduce(sel);
 
-#ifndef TEST
     Info("Waiting for opponent to connect...");
     while(!started){
-        fetch();
+        if(!autoconnect)
+            fetch();
     }
     Info("Game started");
-#endif
     //object_introduce(new Base(sf::Vector2f(DisplayServer::window_size().x-150, DisplayServer::window_size().y/2-160), main_ui_controller->left_health_text_view, Side::Right ) );   
     //object_introduce( new Base(  sf::Vector2f(30,DisplayServer::window_size().y/2-160) , main_ui_controller->right_health_text_view , Side::Left  )  );
 }

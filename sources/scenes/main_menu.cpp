@@ -31,8 +31,7 @@ MainMenuController::MainMenuController(){
     local_host->set_callback([](){
         std::thread serv(&launch_server,25565);
         serv.detach();
-        //TODO autoconnect to a local server
-        SceneManager::introduce_scene("Battlefield",new Battlefield,true);
+        SceneManager::introduce_scene("Battlefield",new Battlefield(Host(sf::IpAddress::getLocalAddress(),25565)),true);
     });
 
     remote_host = new Button(btn_size,sf::Color::White);

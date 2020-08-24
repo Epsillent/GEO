@@ -18,6 +18,8 @@ public:
 class Battlefield: public NetworkScene {
     private:
         static bool started;
+        bool autoconnect;
+        Host localhost;
         Resources *m_left_resources;
         Resources *m_right_resources;
         
@@ -26,6 +28,8 @@ class Battlefield: public NetworkScene {
         friend class RemoteSelector;
         friend class LocalSelector;
     public:
+        Battlefield();
+        Battlefield(const Host &host);
         void on_introduce()override;
         void on_update(float dt)override;
 };
