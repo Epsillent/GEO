@@ -9,6 +9,7 @@ struct TexturePack{
     sf::Texture protector[2];
     sf::Texture generator[2];
     sf::Texture shooter[2];
+    sf::Texture base[2];
     TexturePack(const std::string &path);
     ~TexturePack() = default;
     TexturePack(const TexturePack &other) = delete;

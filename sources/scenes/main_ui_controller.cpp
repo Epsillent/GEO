@@ -5,14 +5,15 @@
 #include "servers/display_server.hpp"
 
 MainUIController::MainUIController(){
-    left_resources_text_view = new TextView("1", AssetsManager::get_font("resources/mont.otf"), sf::Color::White, 100);
-    right_resources_text_view = new TextView("2", AssetsManager::get_font("resources/mont.otf"), sf::Color::White, 100);
+    left_resources_text_view = new TextView("1", AssetsManager::get_font("resources/mont.otf"), sf::Color::White, 60);
+    right_resources_text_view = new TextView("2", AssetsManager::get_font("resources/mont.otf"), sf::Color::White, 60);
 
     left_health_text_view  = new TextView( "4", AssetsManager::get_font("resources/mont.otf"), sf::Color::White, 80 );
     right_health_text_view = new TextView( "3", AssetsManager::get_font("resources/mont.otf"), sf::Color::White, 80 );
     
-    left_resources_text_view->set_position(sf::Vector2f(200, 700));
-    right_resources_text_view->set_position(sf::Vector2f((DisplayServer::window_size()).x-250, 700));
+    //left_resources_text_view->set_position(sf::Vector2f(200, 700));
+    right_resources_text_view->set_position(sf::Vector2f(DisplayServer::window_size().x/2+65, 0));
+    left_resources_text_view->set_position(sf::Vector2f(410, 0));
     
     left_health_text_view->set_position(sf::Vector2f(200,100) );
     right_health_text_view->set_position(sf::Vector2f(100,100));

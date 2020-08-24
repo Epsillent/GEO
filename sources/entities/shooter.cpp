@@ -10,8 +10,7 @@ Shooter::Shooter(sf::Vector2f coordinates, sf::Vector2f direction, Side side):
     translate(coordinates);
     m_body = component_add<Sprite2D>();
     m_body->set_texture(&GeoPropeties::texture_pack->shooter[side]);
-    
-    
+
     m_body->set_size(sf::Vector2f(GeoPropeties::figure_edge, GeoPropeties::figure_edge));
     
     bullet_partical_sys_pr.color_begin = sf::Color::Red;
