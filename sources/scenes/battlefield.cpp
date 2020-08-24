@@ -95,3 +95,7 @@ void Battlefield::on_update(float dt) {
     }
 
 }
+
+void Battlefield::erase(const sf::Vector2u &position){
+    field[position.x][position.y]=0;
+}

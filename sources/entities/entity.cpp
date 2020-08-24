@@ -4,14 +4,23 @@
 #include "const.hpp"
 #include "ui/ui.hpp"
 #include "bullet.hpp"
+#include "scenes/battlefield.hpp"
 
-Entity::Entity(int health) {
+Entity::Entity(int health):
+      inserted(false),
+      position(0,0)
+
+{
       m_health = health;
       Trigger2DProperties pr_trigger_2d;
       pr_trigger_2d.callback = CALLBACK(&Entity::on_collided);
       pr_trigger_2d.size = Trigger2D::size(GeoPropeties::figure_edge, GeoPropeties::figure_edge);
       m_c_trigger_2d = component_add<Trigger2D>(pr_trigger_2d);
       std::cout << m_side;
+}
+Entity::~Entity(){
+      if(inserted)
+            static_cast<Battlefield*>(scene())->erase(position);
 }
 
 void Entity::make_damage(int damage) {
@@ -40,4 +49,9 @@ void Entity::set_collider_size(sf::Vector2f size) {
       props.size = Trigger2D::size(size.x, size.y);
       props.callback = CALLBACK(&Entity::on_collided);
       m_c_trigger_2d->set_properties(props);
+}
+
+void Entity::insert(const sf::Vector2u &pos){
+      inserted = true;
+      position = pos;
 }
