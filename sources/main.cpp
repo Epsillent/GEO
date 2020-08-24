@@ -15,7 +15,7 @@ int main() {
     props.frame_rate_limit = 60;
     //engine->init(props);
     engine->initialize(props);
-    engine->set_entry_scene(new Battlefield, "Battlefield");
+    engine->set_entry_scene(new MainMenu, "MainMenu");
     Random::seed(time(0));
     engine->start();
     engine->finalize();
