@@ -39,7 +39,6 @@ public:
     void on_introduce()override;
     void on_network_translate(const sf::Vector2f &local_position)override;
     void on_originator_event(const OriginatorEvent &event)override;
-    void on_destroy()override;
 };
 
 #endif

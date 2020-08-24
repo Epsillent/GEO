@@ -7,7 +7,7 @@ GeoServer::GeoServer(uint16 port):
 }
 
 std::atomic<bool> server_started(false);
-bool server_created = false;
+
 void launch_server(uint16 port){
     Info("----LOCAL SERVER PROPERTIES----");
     Info("-------------------------------");
@@ -15,7 +15,6 @@ void launch_server(uint16 port){
     Info("NetworkIP: " +sf::IpAddress::getPublicAddress().toString());
     Info("Port:      " + std::to_string(port));
     Info("-------------------------------");
-    server_created = true;
     GeoServer serv(port);
     server_started.exchange(true);
     serv.serve();

@@ -11,5 +11,4 @@ public:
 
 extern void launch_server(uint16 port);
 extern std::atomic<bool> server_started;
-extern bool server_created;
 #endif
