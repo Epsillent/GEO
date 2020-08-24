@@ -17,18 +17,14 @@ class Entity: public GameObject {
     protected:
         Trigger2D *m_c_trigger_2d;
         int m_health;
-        bool inserted;
-        sf::Vector2u position;
-
+        
     public:
         Entity(int health);
-        ~Entity();
         Side m_side;
         void make_damage(int damage);
         void on_collided(Trigger2D other);
         void add_health_text_view(TextView *health_text_view);
         void set_collider_size(sf::Vector2f size);
-        void insert(const sf::Vector2u &pos);
 };
 
 #endif

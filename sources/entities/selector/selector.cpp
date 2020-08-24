@@ -52,37 +52,33 @@ void LocalSelector::on_update(float dt){
         m_time = 0;
         m_delay = 0;
     }
-    uint8 (&array)[5][5] = static_cast<Battlefield*>(scene())->field;
-    if(Input::key_pressed(KeyCode::Space) && array[m_current_cell.x][m_current_cell.y]==0){
+    if(Input::key_pressed(KeyCode::Space)){
         if(!spawned){
             spawned = true;
             originator_event(OriginatorEvent(m_selected));
-            array[m_current_cell.x][m_current_cell.y]=1;
-            Entity *entity;
             switch (m_selected)
             {
             case EntitiesList::GeneratorType:
                 if(((Battlefield*)scene())->m_left_resources->m_resources_count-3>=0){
                     ((Battlefield*)scene())->m_left_resources->resources_decrease(3);
-                    entity = (Entity*)object_introduce(new Generator(1,((Battlefield*)scene())->m_left_resources,GeoPropeties::offset_in_selector,Side::Left));
+                    object_introduce(new Generator(1,((Battlefield*)scene())->m_left_resources,GeoPropeties::offset_in_selector,Side::Left));
                 }
                 break;
             case EntitiesList::ShooterType:
                 if(((Battlefield*)scene())->m_left_resources->m_resources_count-3>=0){
                     ((Battlefield*)scene())->m_left_resources->resources_decrease(3);
-                    entity = (Entity*)object_introduce(new Shooter(GeoPropeties::offset_in_selector,sf::Vector2f(1,0), Side::Left));
+                    object_introduce(new Shooter(GeoPropeties::offset_in_selector,sf::Vector2f(1,0), Side::Left));
                 }
                 break;
             case EntitiesList::ProtectorType:
                 if(((Battlefield*)scene())->m_left_resources->m_resources_count-3>=0){
                     ((Battlefield*)scene())->m_left_resources->resources_decrease(3);
-                    entity = (Entity*)object_introduce(new Protector(GeoPropeties::offset_in_selector, Side::Left));
+                    object_introduce(new Protector(GeoPropeties::offset_in_selector, Side::Left));
                 }
                 break;
             default:
                 break;
             }
-            entity->insert(m_current_cell);
         }
 
     } else{

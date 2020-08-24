@@ -32,7 +32,6 @@ class Battlefield: public NetworkScene {
         Battlefield(const Host &host);
         void on_introduce()override;
         void on_update(float dt)override;
-        void erase(const sf::Vector2u &position);
 };
 
 #endif
