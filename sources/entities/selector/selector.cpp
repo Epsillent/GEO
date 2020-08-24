@@ -59,16 +59,22 @@ void LocalSelector::on_update(float dt){
             switch (m_selected)
             {
             case EntitiesList::GeneratorType:
-                ((Battlefield*)scene())->m_left_resources->resources_decrease(3);
-                object_introduce(new Generator(1,((Battlefield*)scene())->m_left_resources,GeoPropeties::offset_in_selector,Side::Left));
+                if(((Battlefield*)scene())->m_left_resources->m_resources_count-3>=0){
+                    ((Battlefield*)scene())->m_left_resources->resources_decrease(3);
+                    object_introduce(new Generator(1,((Battlefield*)scene())->m_left_resources,GeoPropeties::offset_in_selector,Side::Left));
+                }
                 break;
             case EntitiesList::ShooterType:
-                ((Battlefield*)scene())->m_left_resources->resources_decrease(3);
-                object_introduce(new Shooter(GeoPropeties::offset_in_selector,sf::Vector2f(1,0), Side::Left));
+                if(((Battlefield*)scene())->m_left_resources->m_resources_count-3>=0){
+                    ((Battlefield*)scene())->m_left_resources->resources_decrease(3);
+                    object_introduce(new Shooter(GeoPropeties::offset_in_selector,sf::Vector2f(1,0), Side::Left));
+                }
                 break;
             case EntitiesList::ProtectorType:
-                ((Battlefield*)scene())->m_left_resources->resources_decrease(3);
-                object_introduce(new Protector(GeoPropeties::offset_in_selector, Side::Left));
+                if(((Battlefield*)scene())->m_left_resources->m_resources_count-3>=0){
+                    ((Battlefield*)scene())->m_left_resources->resources_decrease(3);
+                    object_introduce(new Protector(GeoPropeties::offset_in_selector, Side::Left));
+                }
                 break;
             default:
                 break;
@@ -112,16 +118,22 @@ void RemoteSelector::on_originator_event(const OriginatorEvent &event){
     switch ((EntitiesList)event.event_code)
     {
     case EntitiesList::GeneratorType:
-        ((Battlefield*)scene())->m_right_resources->resources_decrease(3);
-        object_introduce(new Generator(1,((Battlefield*)scene())->m_right_resources,GeoPropeties::offset_in_selector,Side::Right));
+        if(((Battlefield*)scene())->m_right_resources->m_resources_count-3>=0){
+            ((Battlefield*)scene())->m_right_resources->resources_decrease(3);
+            object_introduce(new Generator(1,((Battlefield*)scene())->m_right_resources,GeoPropeties::offset_in_selector,Side::Right));
+        }
         break;
     case EntitiesList::ShooterType:
-        ((Battlefield*)scene())->m_right_resources->resources_decrease(3);
-        object_introduce(new Shooter(GeoPropeties::offset_in_selector,sf::Vector2f(-1,0), Side::Right));
+        if(((Battlefield*)scene())->m_right_resources->m_resources_count-3>=0){
+            ((Battlefield*)scene())->m_right_resources->resources_decrease(3);
+            object_introduce(new Shooter(GeoPropeties::offset_in_selector,sf::Vector2f(-1,0), Side::Right));
+        }
         break;
     case EntitiesList::ProtectorType:
-        ((Battlefield*)scene())->m_right_resources->resources_decrease(3);
-        object_introduce(new Protector(GeoPropeties::offset_in_selector, Side::Right));
+        if(((Battlefield*)scene())->m_right_resources->m_resources_count-3>=0){
+            ((Battlefield*)scene())->m_right_resources->resources_decrease(3);
+            object_introduce(new Protector(GeoPropeties::offset_in_selector, Side::Right));
+        }
         break;
     default:
         break;

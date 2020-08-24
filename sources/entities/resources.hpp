@@ -7,7 +7,7 @@
 #include "utils/assets_manager.hpp"
 
 class Resources: public GameObject {
-    private:
+    public:
         int m_resources_count=0;
         TextView *m_text_view;
         int timer=0;
