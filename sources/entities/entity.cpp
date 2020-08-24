@@ -17,7 +17,9 @@ Entity::Entity(int health) {
 void Entity::make_damage(int damage) {
       m_health-=damage;
       if(m_health<=0) { 
-            //m_health_text_view->set_string("dead");
+            if(m_health_text_view != nullptr){
+                  m_health_text_view->set_string("dead");
+            }
             destroy();
       } else if(m_health_text_view) {
             m_health_text_view->set_string(std::to_string(m_health));
