@@ -11,17 +11,23 @@
 #include "servers/display_server.hpp"
 #include "const.hpp"
 #include "core/math/random.hpp"
-bool Battlefield::started = false;
+// REMOVE THIS IN REALESE BUILD
+#define TEST
 
+#ifndef TEST
+bool Battlefield::started = false;
+#else
+bool Battlefield::started = true;
+#endif
 Background::Background(){
     Sprite2D *sprite = component_add<Sprite2D>();
     sprite->set_size(DisplayServer::window_size().x,DisplayServer::window_size().y);
     sprite->set_texture(&GeoPropeties::texture_pack->battlefield);
 }
-#define CUSTOM
 void Battlefield::on_introduce() {
     sf::Clock time;
     memset(field,0,sizeof(field));
+#ifndef TEST
     std::cout << "Enter server ip:";
     std::string ip;
     std::cin >> ip;
@@ -29,7 +35,7 @@ void Battlefield::on_introduce() {
     uint16 port;
     std::cin >> port;
     connect(Host(ip,port));
-    
+#endif
     GeoPropeties::texture_pack = new TexturePack("resources/capitalist/");
     object_introduce(new Background());
 
@@ -45,13 +51,13 @@ void Battlefield::on_introduce() {
     LocalSelector *sel = new LocalSelector;
     sel->translate(GeoPropeties::grid_offset);
     network_object_introduce(sel);
-
+#ifndef TEST
     Info("Waiting for opponent to connect...");
     while(!started){
         fetch();
     }
     Info("Game started");
-
+#endif
     //object_introduce(new Base(sf::Vector2f(DisplayServer::window_size().x-150, DisplayServer::window_size().y/2-160), main_ui_controller->left_health_text_view, Side::Right ) );   
     //object_introduce( new Base(  sf::Vector2f(30,DisplayServer::window_size().y/2-160) , main_ui_controller->right_health_text_view , Side::Left  )  );
 }
