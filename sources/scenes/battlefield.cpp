@@ -13,7 +13,7 @@
 #include "core/math/random.hpp"
 #include "server.hpp"
 // REMOVE THIS IN REALESE BUILD
-#define TEST
+//#define TEST
 
 #ifndef TEST
 bool Battlefield::started = false;
@@ -80,8 +80,7 @@ void Battlefield::on_introduce() {
 
     Info("Waiting for opponent to connect...");
     while(!started){
-        if(!autoconnect)
-            fetch();
+        fetch();
     }
     Info("Game started");
     //object_introduce(new Base(sf::Vector2f(DisplayServer::window_size().x-150, DisplayServer::window_size().y/2-160), main_ui_controller->left_health_text_view, Side::Right ) );   
