@@ -1,6 +1,6 @@
 #include "entities/base.hpp"
 #include "const.hpp"
-
+#include "scenes/battlefield.hpp"
 Base::Base(sf::Vector2f coordinates, TextView *health_text_view_to_update, Side side): Entity(GeoPropeties::base_health){
     translate(coordinates);
     m_body = component_add<Sprite2D>();
@@ -26,4 +26,8 @@ void Base::health_decrease(int value) {
     if(m_health<=0) {
         m_health_text_view->set_string( "dead" );
     }
+}
+
+void Base::on_destroy(){
+    ((Battlefield*)scene())->end_game(m_side);
 }

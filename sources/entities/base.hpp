@@ -12,8 +12,9 @@ class Base: public Entity {
         TextView *m_health_text_view;
     public:
         Base(sf::Vector2f coordinates, TextView *health_text_view_to_update, Side side);
-        void on_update(float dt);
+        void on_update(float dt)override;
         void health_decrease(int value);
+        void on_destroy()override;
 };
 
 #endif

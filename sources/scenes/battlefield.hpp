@@ -6,6 +6,7 @@
 #include "ui/ui.hpp"
 #include "utils/assets_manager.hpp"
 #include <vector>
+#include "entities/entity.hpp"
 
 #include "entities/resources.hpp"
 #include "network/network_scene.hpp"
@@ -19,8 +20,7 @@ class BattlefieldUIController: public UIController{
         TextView *right_health_text_view;
         BattlefieldUIController();
 
-        void win_pop_up();
-        void lose_pop_up();
+        void end_game(Side loser);
 };
 
 class Background: public GameObject{
@@ -50,7 +50,7 @@ class Battlefield: public NetworkScene {
         void on_introduce()override;
         void on_update(float dt)override;
         void begin_game();
-        void end_game();
+        void end_game(Side loser = Side::Left);
 };
 
 #endif

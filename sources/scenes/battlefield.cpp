@@ -46,12 +46,28 @@ BattlefieldUIController::BattlefieldUIController() {
 
 }
 
-void BattlefieldUIController::win_pop_up(){
+void BattlefieldUIController::end_game(Side side){
+    sf::Vector2f banner_size(400,400);
+    ImageView *banner = new ImageView(banner_size);
+    if(side == Side::Left){
+        banner->set_texture(&GeoPropeties::texture_pack->lose_notification);
+    }else{
+        banner->set_texture(&GeoPropeties::texture_pack->win_notification);
+
+    }
+    banner->set_position(sf::Vector2f(DisplayServer::window_size().x/2-banner_size.x/2,100));
+    
+    sf::Vector2f btn_size(100,100);
+    Button *btn = new Button(sf::Vector2f(100,100));
+    btn->set_texture(&GeoPropeties::texture_pack->main_menu_button);
+    btn->set_position(sf::Vector2f(DisplayServer::window_size().x/2-btn_size.x/2,100));
+    btn->set_callback([](){
+        SceneManager::set_scene("MainMenu");
+        SceneManager::substract_scene("Battlefield");
+    });
 
 }
-void BattlefieldUIController::lose_pop_up(){
 
-}
 
 Background::Background() {
     Sprite2D *sprite = component_add<Sprite2D>();
@@ -132,6 +148,7 @@ void Battlefield::on_update(float dt) {
 void Battlefield::begin_game(){
     Info("Game started");
 }
-void Battlefield::end_game(){
+void Battlefield::end_game(Side side){
+    ui_controller->end_game(side);
     local_selector->destroy();
 }
