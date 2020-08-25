@@ -4,7 +4,6 @@
 #include "entities/protector.hpp"
 #include "entities/resources.hpp"
 #include "entities/selector/selector.hpp"
-#include "scenes/main_ui_controller.hpp"
 #include "entities/base.hpp"
 #include "string.h"
 #include "engine.hpp"
@@ -31,9 +30,10 @@ BattlefieldUIController::BattlefieldUIController() {
     
     left_health_text_view->set_position(sf::Vector2f(20, DisplayServer::window_size().y-100 ));
     right_health_text_view->set_position(sf::Vector2f(DisplayServer::window_size().x-80, DisplayServer::window_size().y-100)) ;
-    sf::Vector2f btn_size(50,50);
-    Button *main_menu = new Button(btn_size,sf::Color::Blue);
-    main_menu->set_position(sf::Vector2f(DisplayServer::window_size().x/2-btn_size.x/2,20));
+    sf::Vector2f btn_size(100,100);
+    Button *main_menu = new Button(btn_size);
+    main_menu->set_position(sf::Vector2f(DisplayServer::window_size().x/2-btn_size.x/2,5));
+    main_menu->set_texture(&GeoPropeties::texture_pack->main_menu_button);
     main_menu->set_callback([](){
         SceneManager::set_scene("MainMenu");
         SceneManager::substract_scene("Battlefield");
