@@ -96,9 +96,7 @@ void Battlefield::on_introduce() {
     m_left_resources = new Resources(ui_controller->left_resources_text_view);
 
     m_left_resources->resources_increase(3);
-    m_right_resources->resources_increase(3);
-
-    object_introduce( new Shooter(sf::Vector2f(600,200), sf::Vector2f(-1,0), Side::Right) );                
+    m_right_resources->resources_increase(3);            
 
     object_introduce( new Base(sf::Vector2f(0, 165), ui_controller->left_health_text_view , Side::Left ));                
     object_introduce( new Base(sf::Vector2f(0, 265), ui_controller->left_health_text_view , Side::Left ));            
