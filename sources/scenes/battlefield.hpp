@@ -10,6 +10,19 @@
 #include "entities/resources.hpp"
 #include "network/network_scene.hpp"
 
+class BattlefieldUIController: public UIController{       
+    public:  
+        TextView *left_resources_text_view;
+        TextView *right_resources_text_view;
+        
+        TextView *left_health_text_view;
+        TextView *right_health_text_view;
+        BattlefieldUIController();
+
+        void win_pop_up();
+        void lose_pop_up();
+};
+
 class Background: public GameObject{
 public:
     Background();
@@ -25,6 +38,7 @@ class Battlefield: public NetworkScene {
         Resources *m_right_resources;
         static LocalSelector *local_selector;
         static RemoteSelector *remote_selector;
+        BattlefieldUIController *ui_controller;
         
         uint8 field[5][5];
         friend class Selector;

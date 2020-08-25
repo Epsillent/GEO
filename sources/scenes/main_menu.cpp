@@ -29,8 +29,11 @@ MainMenuController::MainMenuController(){
     local_host->set_position(sf::Vector2f(button_padding,200));
     local_host->set_texture(&GeoPropeties::texture_pack->local_btn);
     local_host->set_callback([](){
-        std::thread serv(&launch_server,25565);
-        serv.detach();
+        if(!server){
+            server = new GeoServer(25565);
+            std::thread serv(&launch_server);
+            serv.detach();
+        }
         SceneManager::introduce_scene("Battlefield",new Battlefield(Host(sf::IpAddress::getLocalAddress(),25565)),true);
     });
 

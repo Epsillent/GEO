@@ -15,8 +15,43 @@
 // REMOVE THIS IN REALESE BUILD
 //#define TEST
 
+
 LocalSelector *Battlefield::local_selector = nullptr;
 RemoteSelector *Battlefield::remote_selector = nullptr;
+
+BattlefieldUIController::BattlefieldUIController() { 
+    left_resources_text_view = new TextView("1", AssetsManager::get_font("resources/mont.otf"), sf::Color::White, 60);
+    right_resources_text_view = new TextView("2", AssetsManager::get_font("resources/mont.otf"), sf::Color::White, 60);
+
+    left_health_text_view  = new TextView( "4", AssetsManager::get_font("resources/mont.otf"), sf::Color::White, 80 );
+    right_health_text_view = new TextView( "3", AssetsManager::get_font("resources/mont.otf"), sf::Color::White, 80 );
+    
+    right_resources_text_view->set_position(sf::Vector2f(DisplayServer::window_size().x/2+175, 0));
+    left_resources_text_view->set_position(sf::Vector2f(410, 0));
+    
+    left_health_text_view->set_position(sf::Vector2f(20, DisplayServer::window_size().y-100 ));
+    right_health_text_view->set_position(sf::Vector2f(DisplayServer::window_size().x-80, DisplayServer::window_size().y-100)) ;
+    sf::Vector2f btn_size(50,50);
+    Button *main_menu = new Button(btn_size,sf::Color::Blue);
+    main_menu->set_position(sf::Vector2f(DisplayServer::window_size().x/2-btn_size.x/2,20));
+    main_menu->set_callback([](){
+        SceneManager::set_scene("MainMenu");
+        SceneManager::substract_scene("Battlefield");
+    });
+    root.push_back(main_menu);
+    root.push_back(left_resources_text_view);
+    root.push_back(right_resources_text_view);
+    root.push_back(left_health_text_view);
+    root.push_back(right_health_text_view);
+
+}
+
+void BattlefieldUIController::win_pop_up(){
+
+}
+void BattlefieldUIController::lose_pop_up(){
+
+}
 
 Background::Background() {
     Sprite2D *sprite = component_add<Sprite2D>();
@@ -42,10 +77,6 @@ void Battlefield::on_introduce() {
     sf::Clock time;
     memset(field,0,sizeof(field));
     if(autoconnect){
-        while(!server_started)
-        {
-            ;
-        }
         connect(localhost);
     }else{
         std::cout << "Enter server ip:";
@@ -58,24 +89,24 @@ void Battlefield::on_introduce() {
     }
     object_introduce(new Background());
 
-    MainUIController *main_ui_controller = new MainUIController();
-    set_ui_controller( main_ui_controller );
+    ui_controller = new BattlefieldUIController();
+    set_ui_controller( ui_controller );
    
-    m_right_resources = new Resources(main_ui_controller->right_resources_text_view);
-    m_left_resources = new Resources(main_ui_controller->left_resources_text_view);
+    m_right_resources = new Resources(ui_controller->right_resources_text_view);
+    m_left_resources = new Resources(ui_controller->left_resources_text_view);
 
     m_left_resources->resources_increase(3);
     m_right_resources->resources_increase(3);
 
     object_introduce( new Shooter(sf::Vector2f(600,200), sf::Vector2f(-1,0), Side::Right) );                
 
-    object_introduce( new Base(sf::Vector2f(0, 165), main_ui_controller->left_health_text_view , Side::Left ));                
-    object_introduce( new Base(sf::Vector2f(0, 265), main_ui_controller->left_health_text_view , Side::Left ));            
-    object_introduce( new Base(sf::Vector2f(0, 365), main_ui_controller->left_health_text_view , Side::Left ));  
+    object_introduce( new Base(sf::Vector2f(0, 165), ui_controller->left_health_text_view , Side::Left ));                
+    object_introduce( new Base(sf::Vector2f(0, 265), ui_controller->left_health_text_view , Side::Left ));            
+    object_introduce( new Base(sf::Vector2f(0, 365), ui_controller->left_health_text_view , Side::Left ));  
 
-    object_introduce( new Base(sf::Vector2f(DisplayServer::window_size().x-100, 165), main_ui_controller->right_health_text_view , Side::Right ));                
-    object_introduce( new Base(sf::Vector2f(DisplayServer::window_size().x-100, 265), main_ui_controller->right_health_text_view , Side::Right ));            
-    object_introduce( new Base(sf::Vector2f(DisplayServer::window_size().x-100, 365), main_ui_controller->right_health_text_view , Side::Right ));             
+    object_introduce( new Base(sf::Vector2f(DisplayServer::window_size().x-100, 165), ui_controller->right_health_text_view , Side::Right ));                
+    object_introduce( new Base(sf::Vector2f(DisplayServer::window_size().x-100, 265), ui_controller->right_health_text_view , Side::Right ));            
+    object_introduce( new Base(sf::Vector2f(DisplayServer::window_size().x-100, 365), ui_controller->right_health_text_view , Side::Right ));             
 
     Random::seed(time.getElapsedTime().asMicroseconds());
     local_selector = new LocalSelector;

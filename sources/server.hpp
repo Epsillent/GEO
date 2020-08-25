@@ -9,6 +9,6 @@ public:
 };
 
 
-extern void launch_server(uint16 port);
-extern std::atomic<bool> server_started;
+extern void launch_server();
+extern GeoServer *server;
 #endif
