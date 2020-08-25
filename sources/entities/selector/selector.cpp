@@ -163,6 +163,6 @@ void RemoteSelector::on_network_translate(const sf::Vector2f &position){
 }
 
 void RemoteSelector::on_destroy(){
-    ((Battlefield*)scene())->end_game();
+    ((Battlefield*)scene())->end_game(Side::Left);
 }
 

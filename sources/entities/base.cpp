@@ -29,5 +29,6 @@ void Base::health_decrease(int value) {
 }
 
 void Base::on_destroy(){
-    ((Battlefield*)scene())->end_game(m_side);
+    if(m_side==Side::Left)
+        ((Battlefield*)scene())->end_game(Side::Left);
 }

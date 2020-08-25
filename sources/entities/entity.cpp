@@ -20,8 +20,6 @@ void Entity::make_damage(int damage) {
       if(m_health<=0) { 
             if(m_health_text_view != nullptr){
                   m_health_text_view->set_string("dead");
-                  if(m_side == Side::Left)
-                        ((Battlefield*)scene())->end_game();
             }
             if(m_cell_value!=nullptr){
                   m_cell_value = 0;
