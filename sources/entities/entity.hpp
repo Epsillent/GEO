@@ -20,6 +20,7 @@ class Entity: public GameObject {
         
     public:
         Entity(int health);
+        int *m_cell_value;
         Side m_side;
         void make_damage(int damage);
         void on_collided(Trigger2D other);

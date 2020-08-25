@@ -23,6 +23,9 @@ void Entity::make_damage(int damage) {
                   if(m_side == Side::Left)
                         ((Battlefield*)scene())->end_game();
             }
+            if(m_cell_value!=nullptr){
+                  m_cell_value = 0;
+            }
             destroy();
       } else if(m_health_text_view) {
             m_health_text_view->set_string(std::to_string(m_health));
