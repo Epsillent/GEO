@@ -13,13 +13,11 @@
 #include "core/math/random.hpp"
 #include "server.hpp"
 // REMOVE THIS IN REALESE BUILD
-#define TEST
+//#define TEST
 
-#ifndef TEST
-bool Battlefield::started = false;
-#else
-bool Battlefield::started = true;
-#endif
+LocalSelector *Battlefield::local_selector = nullptr;
+RemoteSelector *Battlefield::remote_selector = nullptr;
+
 Background::Background() {
     Sprite2D *sprite = component_add<Sprite2D>();
     sprite->set_size(DisplayServer::window_size().x,DisplayServer::window_size().y);
@@ -28,13 +26,17 @@ Background::Background() {
 
 Battlefield::Battlefield():
     autoconnect(false)
-{}
+{
+    local_selector = nullptr;
+    remote_selector = nullptr;
+}
 
 Battlefield::Battlefield(const Host &host):
     autoconnect(true),
     localhost(host)
 {
-
+    local_selector = nullptr;
+    remote_selector = nullptr;
 }
 void Battlefield::on_introduce() {
     sf::Clock time;
@@ -76,16 +78,15 @@ void Battlefield::on_introduce() {
     object_introduce( new Base(sf::Vector2f(DisplayServer::window_size().x-100, 365), main_ui_controller->right_health_text_view , Side::Right ));             
 
     Random::seed(time.getElapsedTime().asMicroseconds());
-    LocalSelector *sel = new LocalSelector;
-    sel->translate(GeoPropeties::grid_offset);
-    network_object_introduce(sel);
+    local_selector = new LocalSelector;
+    local_selector->translate(GeoPropeties::grid_offset);
+    network_object_introduce(local_selector);
 
     Info("Waiting for opponent to connect...");
-    while(!started){
-        if(!autoconnect)
-            fetch();
+    while(!local_selector && !remote_selector){
+        fetch();
     }
-    Info("Game started");
+    begin_game();
     //object_introduce(new Base(sf::Vector2f(DisplayServer::window_size().x-150, DisplayServer::window_size().y/2-160), main_ui_controller->left_health_text_view, Side::Right ) );   
     //object_introduce( new Base(  sf::Vector2f(30,DisplayServer::window_size().y/2-160) , main_ui_controller->right_health_text_view , Side::Left  )  );
 }
@@ -96,4 +97,12 @@ void Battlefield::on_update(float dt) {
         Engine::get_singleton()->stop();    
     }
 
+}
+
+
+void Battlefield::begin_game(){
+    Info("Game started");
+}
+void Battlefield::end_game(){
+    local_selector->destroy();
 }

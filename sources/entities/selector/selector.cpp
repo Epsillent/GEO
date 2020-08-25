@@ -13,6 +13,7 @@ LocalSelector::LocalSelector():
 
 void LocalSelector::on_introduce(){
     set_tag("LocalSelector");
+    Battlefield::local_selector = this;
     mp_body = component_add<Sprite2D>();
     mp_body->set_size(GeoPropeties::selector_size);
     mp_body->set_texture(&GeoPropeties::texture_pack->selector[Side::Left]);
@@ -109,7 +110,7 @@ void LocalSelector::on_network_translate(const sf::Vector2f &position){
 
 void RemoteSelector::on_introduce(){
     set_tag("RemoteSelector");
-    Battlefield::started = true;
+    Battlefield::remote_selector = this;
     mp_body = component_add<Sprite2D>();
     mp_body->set_size(GeoPropeties::selector_size);
     mp_body->set_texture(&GeoPropeties::texture_pack->selector[Side::Right]);
@@ -144,5 +145,9 @@ void RemoteSelector::on_network_translate(const sf::Vector2f &position){
     //Info("RemoteSelector:OnTranslate: " + ARG_VEC("LocalPosition",position) + ARG_VEC("SetPosition",sf::Vector2f(DisplayServer::window_size().x-position.x-GeoPropeties::selector_size.x,position.y)));
     set_local_position(sf::Vector2f(DisplayServer::window_size().x-position.x-GeoPropeties::selector_size.x,position.y));
     //set_local_position(position);
+}
+
+void RemoteSelector::on_destroy(){
+    ((Battlefield*)scene())->end_game();
 }
 

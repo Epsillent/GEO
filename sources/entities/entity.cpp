@@ -4,6 +4,7 @@
 #include "const.hpp"
 #include "ui/ui.hpp"
 #include "bullet.hpp"
+#include "scenes/battlefield.hpp"
 
 Entity::Entity(int health) {
       m_health = health;
@@ -19,6 +20,8 @@ void Entity::make_damage(int damage) {
       if(m_health<=0) { 
             if(m_health_text_view != nullptr){
                   m_health_text_view->set_string("dead");
+                  if(m_side == Side::Left)
+                        ((Battlefield*)scene())->end_game();
             }
             destroy();
       } else if(m_health_text_view) {
