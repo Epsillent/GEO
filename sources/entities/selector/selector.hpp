@@ -22,6 +22,8 @@ private:
     float m_time;
     float m_delay;
     bool spawned;
+    int entities_hash_map[5][5];
+    sf::Vector2i selector_location;
 public:
     LocalSelector();
     void on_introduce()override;
