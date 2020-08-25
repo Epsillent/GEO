@@ -56,13 +56,13 @@ void LocalSelector::on_update(float dt){
         m_delay = 0;
     }
     if(Input::key_pressed(KeyCode::Space)){
-        if(!spawned){
+        if(!spawned && entities_hash_map[m_current_cell.x][m_current_cell.y]!=1){
             spawned = true;
             originator_event(OriginatorEvent(m_selected));
             switch (m_selected)
             {
             case EntitiesList::GeneratorType:
-                if(((Battlefield*)scene())->m_left_resources->m_resources_count-3>=0 && entities_hash_map[m_current_cell.x][m_current_cell.y]!=1 ){
+                if(((Battlefield*)scene())->m_left_resources->m_resources_count-3>=0){
                     ((Battlefield*)scene())->m_left_resources->resources_decrease(3);
                     //object_introduce(new Generator(1,((Battlefield*)scene())->m_left_resources,GeoPropeties::offset_in_selector,Side::Left));
                     Generator *generator = (Generator*)object_introduce(new Generator(1,((Battlefield*)scene())->m_left_resources, GeoPropeties::offset_in_selector, Side::Left));

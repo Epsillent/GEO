@@ -149,6 +149,7 @@ void Battlefield::begin_game(){
     Info("Game started");
 }
 void Battlefield::end_game(Side side){
+    Info("---Game Finished---");
     ui_controller->end_game(side);
     local_selector->destroy();
 }
