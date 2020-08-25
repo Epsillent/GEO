@@ -12,6 +12,8 @@ struct TexturePack{
     sf::Texture base[2];
     sf::Texture remote_btn;
     sf::Texture local_btn;
+    sf::Texture win_notification;
+    sf::Texture lose_notification;
     sf::Texture main_menu_button;
     sf::Texture main_menu_background;
     TexturePack(const std::string &path);

@@ -15,9 +15,11 @@ TexturePack::TexturePack(const std::string &path)
     shooter[Side::Right].loadFromFile(path+"Right/Shooter.png") && 
     base[Side::Left].loadFromFile(path+"Left/BaseUnit.png") &&
     base[Side::Right].loadFromFile(path+"Right/BaseUnit.png")&&
-    main_menu_button.loadFromFile(path+"UI/MainMenuButton.png")&&
+    win_notification.loadFromFile(path+"UI/WinPopup.png")&&
+    lose_notification.loadFromFile(path+"UI/LosePopup.png")&&
     local_btn.loadFromFile(path+"UI/LocalButton.png")&&
     remote_btn.loadFromFile(path+"UI/RemoteButton.png")&&
+    main_menu_button.loadFromFile(path+"UI/MainMenuButton.png")&&
     main_menu_background.loadFromFile(path+"MainMenu.png"))) {
         Error("Loading TexturePack failed");
     }
