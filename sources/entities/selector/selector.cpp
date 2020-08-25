@@ -4,6 +4,7 @@
 #include "entities/protector.hpp"
 #include "entities/generator.hpp"
 #include "scenes/battlefield.hpp"
+
 LocalSelector::LocalSelector():
     m_current_cell(0,0),
     m_delay(0),
@@ -17,6 +18,7 @@ void LocalSelector::on_introduce(){
     mp_body = component_add<Sprite2D>();
     mp_body->set_size(GeoPropeties::selector_size);
     mp_body->set_texture(&GeoPropeties::texture_pack->selector[Side::Left]);
+    selector_location = sf::Vector2i(0,0);
 }
 
 void LocalSelector::on_update(float dt){
@@ -60,21 +62,27 @@ void LocalSelector::on_update(float dt){
             switch (m_selected)
             {
             case EntitiesList::GeneratorType:
-                if(((Battlefield*)scene())->m_left_resources->m_resources_count-3>=0){
+                if(((Battlefield*)scene())->m_left_resources->m_resources_count-3>=0 && entities_hash_map[m_current_cell.x][m_current_cell.y]!=1 ){
                     ((Battlefield*)scene())->m_left_resources->resources_decrease(3);
                     object_introduce(new Generator(1,((Battlefield*)scene())->m_left_resources,GeoPropeties::offset_in_selector,Side::Left));
+                    entities_hash_map[m_current_cell.x][m_current_cell.y] = 1;
+                    printf("\n%i\n",entities_hash_map[m_current_cell.x][m_current_cell.y]);
                 }
                 break;
             case EntitiesList::ShooterType:
-                if(((Battlefield*)scene())->m_left_resources->m_resources_count-3>=0){
+                if(((Battlefield*)scene())->m_left_resources->m_resources_count-3>=0 && entities_hash_map[m_current_cell.x][m_current_cell.y]!=1 ){
                     ((Battlefield*)scene())->m_left_resources->resources_decrease(3);
                     object_introduce(new Shooter(GeoPropeties::offset_in_selector,sf::Vector2f(1,0), Side::Left));
+                    entities_hash_map[m_current_cell.x][m_current_cell.y] = 1;
+                    printf("\n%i\n",entities_hash_map[m_current_cell.x][m_current_cell.y]);
                 }
                 break;
             case EntitiesList::ProtectorType:
-                if(((Battlefield*)scene())->m_left_resources->m_resources_count-3>=0){
+                if(((Battlefield*)scene())->m_left_resources->m_resources_count-3>=0 && entities_hash_map[m_current_cell.x][m_current_cell.y]!=1 ){
                     ((Battlefield*)scene())->m_left_resources->resources_decrease(3);
                     object_introduce(new Protector(GeoPropeties::offset_in_selector, Side::Left));
+                    entities_hash_map[m_current_cell.x][m_current_cell.y] = 1;
+                    printf("\n%i\n",entities_hash_map[m_current_cell.x][m_current_cell.y]);
                 }
                 break;
             default:
@@ -122,6 +130,7 @@ void RemoteSelector::on_originator_event(const OriginatorEvent &event){
         if(((Battlefield*)scene())->m_right_resources->m_resources_count-3>=0){
             ((Battlefield*)scene())->m_right_resources->resources_decrease(3);
             object_introduce(new Generator(1,((Battlefield*)scene())->m_right_resources,GeoPropeties::offset_in_selector,Side::Right));
+        
         }
         break;
     case EntitiesList::ShooterType:
