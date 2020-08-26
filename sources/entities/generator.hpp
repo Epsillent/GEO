@@ -8,7 +8,7 @@
 class Generator: public Entity {
     private:    
         Sprite2D *body;
-        float m_spawn_rate;
+        float m_give;
         float timer=0;
         Resources *m_resources_to_update;
     public:

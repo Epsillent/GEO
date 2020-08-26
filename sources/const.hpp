@@ -19,6 +19,8 @@ struct GeoPropeties {
     static const float generator_rate;
     static const float shooter_rate;
 
+    static const float generator_gives;
+
     static const float bullet_speed;
     static const float bullet_lifetime;
 

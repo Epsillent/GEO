@@ -7,7 +7,7 @@
 
 Generator::Generator(uint8 &cell, Side side,Resources* resources_to_update): 
     Entity(GeoPropeties::generator_health,cell,side),
-    m_spawn_rate(GeoPropeties::generator_rate),
+    m_give(GeoPropeties::generator_gives),
     m_resources_to_update(resources_to_update)
 {
     body = component_add<Sprite2D>();
@@ -19,8 +19,8 @@ Generator::Generator(uint8 &cell, Side side,Resources* resources_to_update):
 
 void Generator::on_update(float dt) {
     timer+=dt;
-    if(timer > 2) {
-        m_resources_to_update->resources_increase(m_spawn_rate);
-        timer -= 2;
+    if(timer > GeoPropeties::generator_rate) {
+        m_resources_to_update->resources_increase(m_give);
+        timer -= GeoPropeties::generator_rate;
     }
 }

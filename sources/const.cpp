@@ -16,6 +16,8 @@ const int GeoPropeties::protector_price = 3;
 const float GeoPropeties::generator_rate = 1;
 const float GeoPropeties::shooter_rate = 4;
 
+const float GeoPropeties::generator_gives = 1;
+
 const float GeoPropeties::bullet_speed = 200;
 const float GeoPropeties::bullet_lifetime = 5;
 
