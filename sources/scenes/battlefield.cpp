@@ -160,5 +160,6 @@ void Battlefield::end_game(Side side){
         game_finished = true;
         ui_controller->end_game(side);
         local_selector->destroy();
+        disconnect();
     }
 }
