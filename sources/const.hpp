@@ -20,6 +20,7 @@ struct GeoPropeties {
     static const float shooter_rate;
 
     static const float bullet_speed;
+    static const float bullet_lifetime;
 
     static const sf::Vector2f cell_size;
     static const sf::Vector2f selector_size;

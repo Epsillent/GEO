@@ -1,7 +1,7 @@
 #include "entities/bullet.hpp"
 #include "components/particle_system.hpp"
 #include "components/trigger_2d.hpp"
-
+#include "const.hpp"
 Bullet::Bullet(Side side, const sf::Vector2f &translation, ParticleSystemProperties &pr_partical_system):
     m_translation(translation),
     m_side(side),
@@ -18,7 +18,7 @@ Bullet::Bullet(Side side, const sf::Vector2f &translation, ParticleSystemPropert
 
 void Bullet::on_update(float dt) {
     m_timer += dt;
-    if (m_timer > 2) {
+    if (m_timer >= GeoPropeties::bullet_lifetime) {
         destroy();
     }
     translate(m_translation*dt);
