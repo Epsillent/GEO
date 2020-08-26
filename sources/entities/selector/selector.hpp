@@ -30,6 +30,7 @@ public:
     void on_network_translate(const sf::Vector2f &local_position)override;
     void on_update(float dt)override;
     void move(int x, int y);
+    void on_destroy()override;
 };
 
 

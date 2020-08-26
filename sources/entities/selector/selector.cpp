@@ -115,6 +115,10 @@ void LocalSelector::on_network_translate(const sf::Vector2f &position){
     //set_local_position(position);
 }
 
+void LocalSelector::on_destroy(){
+    Battlefield::remote_selector = nullptr;
+}   
+
 void RemoteSelector::on_introduce(){
     set_tag("RemoteSelector");
     Battlefield::remote_selector = this;
@@ -151,5 +155,6 @@ void RemoteSelector::on_network_translate(const sf::Vector2f &position){
 void RemoteSelector::on_destroy(){
     //Info("RemoteEndGame");
     ((Battlefield*)scene())->end_game(Side::Right);
+    Battlefield::remote_selector = nullptr;
 }
 
