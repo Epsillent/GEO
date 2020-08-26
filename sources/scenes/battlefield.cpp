@@ -57,10 +57,10 @@ void BattlefieldUIController::end_game(Side side){
     }
     banner->set_position(sf::Vector2f(DisplayServer::window_size().x/2-banner_size.x/2,100));
     
-    sf::Vector2f btn_size(100,100);
-    Button *btn = new Button(sf::Vector2f(100,100));
+    sf::Vector2f btn_size(200,200);
+    Button *btn = new Button(sf::Vector2f(btn_size));
     btn->set_texture(&GeoPropeties::texture_pack->main_menu_button);
-    btn->set_position(sf::Vector2f(DisplayServer::window_size().x/2-btn_size.x/2,200));
+    btn->set_position(sf::Vector2f(DisplayServer::window_size().x/2-btn_size.x/2,400));
     btn->set_callback([](){
         SceneManager::set_scene("MainMenu");
         SceneManager::substract_scene("Battlefield");
