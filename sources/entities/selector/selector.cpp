@@ -64,32 +64,24 @@ void LocalSelector::on_update(float dt){
             case EntitiesList::GeneratorType:
                 if(((Battlefield*)scene())->m_left_resources->m_resources_count-3>=0){
                     ((Battlefield*)scene())->m_left_resources->resources_decrease(3);
-                    //object_introduce(new Generator(1,((Battlefield*)scene())->m_left_resources,GeoPropeties::offset_in_selector,Side::Left));
-                    Generator *generator = (Generator*)object_introduce(new Generator(1,((Battlefield*)scene())->m_right_resources, GeoPropeties::offset_in_selector, Side::Right));
+                    object_introduce(new Generator(1,((Battlefield*)scene())->m_left_resources,GeoPropeties::offset_in_selector,Side::Left));
                     entities_hash_map[m_current_cell.x][m_current_cell.y] = 1;
                     printf("\n%i\n",entities_hash_map[m_current_cell.x][m_current_cell.y]);
-
-                    
-                    generator->m_cell_value = &entities_hash_map[m_current_cell.x][m_current_cell.y];
                 }
                 break;
             case EntitiesList::ShooterType:
                 if(((Battlefield*)scene())->m_left_resources->m_resources_count-3>=0 && entities_hash_map[m_current_cell.x][m_current_cell.y]!=1 ){
                     ((Battlefield*)scene())->m_left_resources->resources_decrease(3);
-                    Shooter *shooter = (Shooter*)object_introduce(new Shooter(GeoPropeties::offset_in_selector,sf::Vector2f(1,0), Side::Left));
+                    object_introduce(new Shooter(GeoPropeties::offset_in_selector,sf::Vector2f(1,0), Side::Left));
                     entities_hash_map[m_current_cell.x][m_current_cell.y] = 1;
-                    
-                    shooter->m_cell_value = &entities_hash_map[m_current_cell.x][m_current_cell.y];
                     printf("\n%i\n",entities_hash_map[m_current_cell.x][m_current_cell.y]);
                 }
                 break;
             case EntitiesList::ProtectorType:
                 if(((Battlefield*)scene())->m_left_resources->m_resources_count-3>=0 && entities_hash_map[m_current_cell.x][m_current_cell.y]!=1 ){
                     ((Battlefield*)scene())->m_left_resources->resources_decrease(3);
-                    Protector *protector = (Protector*)object_introduce(new Protector(GeoPropeties::offset_in_selector, Side::Left));
+                    object_introduce(new Protector(GeoPropeties::offset_in_selector, Side::Left));
                     entities_hash_map[m_current_cell.x][m_current_cell.y] = 1;
-                    
-                    protector->m_cell_value = &entities_hash_map[m_current_cell.x][m_current_cell.y];
                     printf("\n%i\n",entities_hash_map[m_current_cell.x][m_current_cell.y]);
                 }
                 break;
@@ -137,6 +129,8 @@ void RemoteSelector::on_originator_event(const OriginatorEvent &event){
     case EntitiesList::GeneratorType:
         if(((Battlefield*)scene())->m_right_resources->m_resources_count-3>=0){
             ((Battlefield*)scene())->m_right_resources->resources_decrease(3);
+            object_introduce(new Generator(1,((Battlefield*)scene())->m_right_resources,GeoPropeties::offset_in_selector,Side::Right));
+        
         }
         break;
     case EntitiesList::ShooterType:
