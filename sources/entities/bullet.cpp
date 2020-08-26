@@ -25,7 +25,8 @@ void Bullet::on_update(float dt) {
 }
 
 void Bullet::on_collided(Trigger2D other) {
-    if(m_side != static_cast<Bullet*>( other.owner() )->m_side && other.owner()->tag() != "bullet" ) {
+    if(m_side != static_cast<Entity*>( other.owner() )->m_side && other.owner()->tag() != "bullet" ) {
         destroy();
+        Info("Destoryed");
     }
 }
