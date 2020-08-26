@@ -52,7 +52,7 @@ class Battlefield: public NetworkScene {
         void on_introduce()override;
         void on_update(float dt)override;
         void begin_game();
-        void end_game(Side loser = Side::Left);
+        void end_game(Side loser);
 };
 
 #endif
