@@ -25,6 +25,8 @@ void Base::health_decrease(int value) {
     m_health_text_view->set_string( std::to_string(this->m_health) );
     if(m_health<=0) {
         m_health_text_view->set_string( "dead" );
+        printf("\n123\n");
+        destroy();
     }
 }
 
