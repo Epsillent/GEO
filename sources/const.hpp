@@ -16,6 +16,11 @@ struct GeoPropeties {
     static const int shooter_price;
     static const int protector_price;
 
+    static const float generator_rate;
+    static const float shooter_rate;
+
+    static const float bullet_speed;
+
     static const sf::Vector2f cell_size;
     static const sf::Vector2f selector_size;
     static const float selector_move_delay;

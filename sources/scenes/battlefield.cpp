@@ -38,33 +38,37 @@ BattlefieldUIController::BattlefieldUIController() {
         SceneManager::set_scene("MainMenu");
         SceneManager::substract_scene("Battlefield");
     });
-    root.push_back(main_menu);
     root.push_back(left_resources_text_view);
     root.push_back(right_resources_text_view);
     root.push_back(left_health_text_view);
     root.push_back(right_health_text_view);
+    
+    root.push_back(main_menu);
 
 }
 
 void BattlefieldUIController::end_game(Side side){
-    sf::Vector2f banner_size(400,400);
+    sf::Vector2f banner_size(1000,600);
     ImageView *banner = new ImageView(banner_size);
     if(side == Side::Left){
         banner->set_texture(&GeoPropeties::texture_pack->lose_notification);
     }else{
         banner->set_texture(&GeoPropeties::texture_pack->win_notification);
-
     }
     banner->set_position(sf::Vector2f(DisplayServer::window_size().x/2-banner_size.x/2,100));
     
     sf::Vector2f btn_size(100,100);
     Button *btn = new Button(sf::Vector2f(100,100));
     btn->set_texture(&GeoPropeties::texture_pack->main_menu_button);
-    btn->set_position(sf::Vector2f(DisplayServer::window_size().x/2-btn_size.x/2,100));
+    btn->set_position(sf::Vector2f(DisplayServer::window_size().x/2-btn_size.x/2,200));
     btn->set_callback([](){
         SceneManager::set_scene("MainMenu");
         SceneManager::substract_scene("Battlefield");
     });
+    delete *std::prev(root.end());
+    root.pop_back();
+    root.push_back(banner);
+    root.push_back(btn);
 
 }
 
@@ -76,7 +80,8 @@ Background::Background() {
 }
 
 Battlefield::Battlefield():
-    autoconnect(false)
+    autoconnect(false),
+    game_finished(false)
 {
     local_selector = nullptr;
     remote_selector = nullptr;
@@ -114,16 +119,17 @@ void Battlefield::on_introduce() {
     m_left_resources->resources_increase(3);
     m_right_resources->resources_increase(3);            
 
-    object_introduce( new Base(sf::Vector2f(0, 165), ui_controller->left_health_text_view , Side::Left ));                
-    object_introduce( new Base(sf::Vector2f(0, 265), ui_controller->left_health_text_view , Side::Left ));            
-    object_introduce( new Base(sf::Vector2f(0, 365), ui_controller->left_health_text_view , Side::Left ));  
+    object_introduce( new Base(Side::Left, ui_controller->left_health_text_view))->translate(sf::Vector2f(0, 165));
+    object_introduce( new Base(Side::Left, ui_controller->left_health_text_view))->translate(sf::Vector2f(0, 265));    
+    object_introduce( new Base(Side::Left, ui_controller->left_health_text_view))->translate(sf::Vector2f(0, 365));    
 
-    object_introduce( new Base(sf::Vector2f(DisplayServer::window_size().x-100, 165), ui_controller->right_health_text_view , Side::Right ));                
-    object_introduce( new Base(sf::Vector2f(DisplayServer::window_size().x-100, 265), ui_controller->right_health_text_view , Side::Right ));            
-    object_introduce( new Base(sf::Vector2f(DisplayServer::window_size().x-100, 365), ui_controller->right_health_text_view , Side::Right ));             
+    object_introduce( new Base(Side::Right, ui_controller->right_health_text_view))->translate(sf::Vector2f(DisplayServer::window_size().x-100, 165));                
+    object_introduce( new Base(Side::Right, ui_controller->right_health_text_view))->translate(sf::Vector2f(DisplayServer::window_size().x-100, 265));                
+    object_introduce( new Base(Side::Right, ui_controller->right_health_text_view))->translate(sf::Vector2f(DisplayServer::window_size().x-100, 365));                
+          
 
     Random::seed(time.getElapsedTime().asMicroseconds());
-    local_selector = new LocalSelector;
+    local_selector = new LocalSelector(&field);
     local_selector->translate(GeoPropeties::grid_offset);
     network_object_introduce(local_selector);
 
@@ -149,6 +155,10 @@ void Battlefield::begin_game(){
     Info("Game started");
 }
 void Battlefield::end_game(Side side){
-    ui_controller->end_game(side);
-    local_selector->destroy();
+    if(!game_finished){
+        Info("GameFinished");
+        game_finished = true;
+        ui_controller->end_game(side);
+        local_selector->destroy();
+    }
 }

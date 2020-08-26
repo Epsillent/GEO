@@ -12,7 +12,7 @@ class Generator: public Entity {
         float timer=0;
         Resources *m_resources_to_update;
     public:
-        Generator(float spawn_rate, Resources *resources_to_update, sf::Vector2f coordinates, Side side);
+        Generator(uint8 &cell, Side side, Resources *resources_to_update );
         void on_update(float dt)override;
 };
 

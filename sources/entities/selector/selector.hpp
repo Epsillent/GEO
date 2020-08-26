@@ -22,8 +22,10 @@ private:
     float m_time;
     float m_delay;
     bool spawned;
+
+    uint8 (*m_field)[5][5];
 public:
-    LocalSelector();
+    LocalSelector(uint8 (*field)[5][5]);
     void on_introduce()override;
     void on_network_translate(const sf::Vector2f &local_position)override;
     void on_update(float dt)override;

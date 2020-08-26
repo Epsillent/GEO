@@ -8,10 +8,9 @@
 
 class Protector: public Entity {
     private:
-        int m_health=5;
         Sprite2D *m_c_body;
     public:
-        Protector(sf::Vector2f coordinates, Side side);
+        Protector(uint8 &cell, Side side);
 };
 
 #endif

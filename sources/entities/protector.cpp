@@ -2,9 +2,9 @@
 #include "components/trigger_2d.hpp"
 #include "const.hpp"
 
-Protector::Protector(sf::Vector2f coordinates, Side side): Entity(GeoPropeties::protector_health) {
-    m_side = side;
-    translate(coordinates);
+Protector::Protector(uint8 &cell, Side side): 
+    Entity(GeoPropeties::protector_health,cell,side) 
+{
     m_c_body = component_add<Sprite2D>();
     m_c_body->set_size(sf::Vector2f(GeoPropeties::figure_edge, GeoPropeties::figure_edge));
     

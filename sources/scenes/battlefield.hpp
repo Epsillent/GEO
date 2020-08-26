@@ -33,6 +33,7 @@ class RemoteSelector;
 class Battlefield: public NetworkScene {
     private:
         bool autoconnect;
+        bool game_finished;
         Host localhost;
         Resources *m_left_resources;
         Resources *m_right_resources;
@@ -41,6 +42,7 @@ class Battlefield: public NetworkScene {
         BattlefieldUIController *ui_controller;
         
         uint8 field[5][5];
+        uint8 fantom;
         friend class Selector;
         friend class RemoteSelector;
         friend class LocalSelector;

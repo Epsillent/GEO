@@ -5,16 +5,21 @@
 #include "components/particle_system.hpp"
 #include "entities/entity.hpp"
 
-class Bullet: public Entity {
+class Bullet: public GameObject{
     private:
+        Side m_side;
+        sf::Vector2f m_translation;
+
+        float m_timer;
+
         ParticleSystem *c_partical_system;
-        sf::Vector2f m_direction = sf::Vector2f(10,10);
-        float m_timer=0;
-        float m_speed=50;
+        Trigger2D *m_c_trigger_2d;
+  
     public:
-        Bullet(sf::Vector2f direction, sf::Vector2f coordinates, float speed, ParticleSystemProperties &pr_partical_system);
+        Bullet(Side side, const sf::Vector2f &translation, ParticleSystemProperties &pr_partical_system);
         void on_update(float dt)override;
         void on_collided(Trigger2D other);
+        Side side(){return m_side;}
 };
 
 

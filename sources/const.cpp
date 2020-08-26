@@ -13,6 +13,11 @@ const int GeoPropeties::generator_price = 3;
 const int GeoPropeties::shooter_price   = 3;
 const int GeoPropeties::protector_price = 3;
 
+const float GeoPropeties::generator_rate = 1;
+const float GeoPropeties::shooter_rate = 1;
+
+const float GeoPropeties::bullet_speed = 350;
+
 const sf::Vector2f GeoPropeties::cell_size(100,100);
 const sf::Vector2f GeoPropeties::selector_size(120,120);
 const float GeoPropeties::selector_move_delay = 0.2f;
