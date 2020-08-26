@@ -134,7 +134,7 @@ void Battlefield::on_introduce() {
     network_object_introduce(local_selector);
 
     Info("Waiting for opponent to connect...");
-    while(!local_selector && !remote_selector){
+    while(!local_selector || !remote_selector){
         fetch();
     }
     begin_game();
