@@ -10,11 +10,11 @@ const int GeoPropeties::base_height = 100;
 const int GeoPropeties::base_width  = 100;
 
 const int GeoPropeties::generator_price = 3;
-const int GeoPropeties::shooter_price   = 3;
+const int GeoPropeties::shooter_price   = 4;
 const int GeoPropeties::protector_price = 3;
 
-const float GeoPropeties::generator_rate = 1;
-const float GeoPropeties::shooter_rate = 4;
+const float GeoPropeties::generator_rate = 4;
+const float GeoPropeties::shooter_rate = 6;
 
 const float GeoPropeties::generator_gives = 1;
 
