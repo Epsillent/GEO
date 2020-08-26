@@ -136,6 +136,7 @@ void Battlefield::on_introduce() {
     Info("Waiting for opponent to connect...");
     while(!local_selector || !remote_selector){
         fetch();
+        ui_controller->on_update(0);
     }
     begin_game();
     //object_introduce(new Base(sf::Vector2f(DisplayServer::window_size().x-150, DisplayServer::window_size().y/2-160), main_ui_controller->left_health_text_view, Side::Right ) );   
