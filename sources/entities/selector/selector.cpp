@@ -59,27 +59,28 @@ void LocalSelector::on_update(float dt){
     if(Input::key_pressed(KeyCode::Space)){
         if(!spawned){
             spawned = true;
-            if(!(*m_field)[m_current_cell.x][m_current_cell.y]){
+            if(!(*m_field)[m_current_cell.y][m_current_cell.x]){
                 switch (m_selected)
                 {
                 case EntitiesList::GeneratorType:
                     if(((Battlefield*)scene())->m_left_resources->m_resources_count-GeoPropeties::generator_price >= 0){
                         ((Battlefield*)scene())->m_left_resources->resources_decrease(GeoPropeties::generator_price);
-                        object_introduce(new Generator((*m_field)[m_current_cell.x][m_current_cell.y],Side::Left,((Battlefield*)scene())->m_left_resources))->translate(GeoPropeties::offset_in_selector);
+                        object_introduce(new Generator((*m_field)[m_current_cell.y][m_current_cell.x],Side::Left,((Battlefield*)scene())->m_left_resources))->translate(GeoPropeties::offset_in_selector);
+                        //printf("the the the %i", (*m_field)[m_current_cell.x][m_current_cell.y]);
                         originator_event(OriginatorEvent(m_selected));
                     }
                     break;
                 case EntitiesList::ShooterType:
                     if(((Battlefield*)scene())->m_left_resources->m_resources_count-GeoPropeties::shooter_price >= 0){
                         ((Battlefield*)scene())->m_left_resources->resources_decrease(GeoPropeties::shooter_price);
-                        object_introduce(new Shooter((*m_field)[m_current_cell.x][m_current_cell.y],Side::Left))->translate(GeoPropeties::offset_in_selector);
+                        object_introduce(new Shooter((*m_field)[m_current_cell.y][m_current_cell.x],Side::Left))->translate(GeoPropeties::offset_in_selector);
                         originator_event(OriginatorEvent(m_selected));
                     }
                     break;
                 case EntitiesList::ProtectorType:
                     if(((Battlefield*)scene())->m_left_resources->m_resources_count-GeoPropeties::protector_price>=0){
                         ((Battlefield*)scene())->m_left_resources->resources_decrease(GeoPropeties::protector_price);
-                        object_introduce(new Protector((*m_field)[m_current_cell.x][m_current_cell.y], Side::Left))->translate(GeoPropeties::offset_in_selector);
+                        object_introduce(new Protector((*m_field)[m_current_cell.y][m_current_cell.x], Side::Left))->translate(GeoPropeties::offset_in_selector);
                         originator_event(OriginatorEvent(m_selected));
                     }
                     break;
@@ -89,7 +90,7 @@ void LocalSelector::on_update(float dt){
                 printf("\n");
                 for(int i=0;i<5;i++) {
                     for(int j=0;j<5;j++) {
-                        printf("%i", (*m_field[i][j]));
+                        printf("%i", (*m_field)[i][j]);
                     }
                     printf("\n");
                 }
@@ -97,7 +98,7 @@ void LocalSelector::on_update(float dt){
                 printf("\nsome shit here! \n"); 
                 for(int i=0;i<5;i++) {
                     for( int j=0;j<5;j++) {
-                        printf("%i", (*m_field[i][j]));
+                        printf("%i", (*m_field)[i][j]);
                     }
                     printf("\n");
                 }

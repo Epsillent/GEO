@@ -85,6 +85,7 @@ Battlefield::Battlefield():
 {
     local_selector = nullptr;
     remote_selector = nullptr;
+    memset(field,0,sizeof(field));
 }
 
 Battlefield::Battlefield(const Host &host):
@@ -95,8 +96,17 @@ Battlefield::Battlefield(const Host &host):
     remote_selector = nullptr;
     
     memset(field,0,sizeof(field));
+    for(int i=0;i<5;i++) {
+        for(int j=0;j<5;j++) {
+            printf("%i", (field[i][j]));
+            //field[i][j] = 0;
+        }
+        printf("\n");
+    }
 }
 void Battlefield::on_introduce() {
+    memset(field,0,sizeof(field));
+
     sf::Clock time;
     if(autoconnect){
         connect(localhost);
