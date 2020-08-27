@@ -119,14 +119,13 @@ void Battlefield::on_introduce() {
     m_left_resources->resources_increase(3);
     m_right_resources->resources_increase(3);            
 
-    object_introduce( new Base(Side::Left, ui_controller->left_health_text_view))->translate(sf::Vector2f(0, 165));
-    object_introduce( new Base(Side::Left, ui_controller->left_health_text_view))->translate(sf::Vector2f(0, 265));    
-    object_introduce( new Base(Side::Left, ui_controller->left_health_text_view))->translate(sf::Vector2f(0, 365));    
+    
+    for(int i = 0; i<3; i++){
+        Base *b=new Base;
+        b->translate(sf::Vector2f(0, 165+100*i));
+        network_object_introduce(b);
+    }  
 
-    object_introduce( new Base(Side::Right, ui_controller->right_health_text_view))->translate(sf::Vector2f(DisplayServer::window_size().x-100, 165));                
-    object_introduce( new Base(Side::Right, ui_controller->right_health_text_view))->translate(sf::Vector2f(DisplayServer::window_size().x-100, 265));                
-    object_introduce( new Base(Side::Right, ui_controller->right_health_text_view))->translate(sf::Vector2f(DisplayServer::window_size().x-100, 365));                
-          
 
     Random::seed(time.getElapsedTime().asMicroseconds());
     local_selector = new LocalSelector(&field);
@@ -144,16 +143,16 @@ void Battlefield::on_introduce() {
 }
 
 void Battlefield::on_update(float dt) {
-    
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-        Engine::get_singleton()->stop();    
-    }
 
 }
 
 
 void Battlefield::begin_game(){
     Info("Game started");
+    sf::Clock n;
+    while(n.getElapsedTime().asSeconds()<3){
+
+    }
 }
 void Battlefield::end_game(Side side){
     if(!game_finished){

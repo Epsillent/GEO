@@ -3,8 +3,10 @@
 #include "scenes/main_menu.hpp"
 #include "entities/selector/selector.hpp"
 #include "core/math/random.hpp"
+#include "entities/base.hpp"
 int main() {
     NetworkObjectsDB::register_object_representation<LocalSelector,RemoteSelector>();
+    NetworkObjectsDB::register_object<Base>();
     
 
     Engine *engine = new Engine;

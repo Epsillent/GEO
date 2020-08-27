@@ -4,9 +4,12 @@
 #include "engine.hpp"
 #include "entities/entity.hpp"
 #include "components/sprite_2d.hpp"
+#include "network/network_object.hpp"
 #include "ui/ui.hpp"
 
-class Base: public GameObject {
+
+class Base: public NetworkObject{
+    NETWORK_CLASS(Base,NetworkObject)
 private:
     Side m_side;
     int m_health;
@@ -17,10 +20,15 @@ private:
     
     Sprite2D *m_body;
 public:
-    Base(Side side, TextView *health_text_view_to_update);
+    Base();
+    void on_introduce()override;
     void on_update(float dt)override;
     void health_decrease(int value);
     void on_collided(Trigger2D other);
+
+    void on_network_translate(const sf::Vector2f &position)override;
+
+    void on_originator_event(const OriginatorEvent &e)override;
 };
 
 #endif

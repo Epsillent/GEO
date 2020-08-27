@@ -27,6 +27,7 @@ class Background: public GameObject{
 public:
     Background();
 };
+class Base;
 class LocalSelector;
 class RemoteSelector;
 
@@ -43,6 +44,7 @@ class Battlefield: public NetworkScene {
         
         uint8 field[5][5];
         uint8 fantom;
+        friend class Base;
         friend class Selector;
         friend class RemoteSelector;
         friend class LocalSelector;
