@@ -86,6 +86,21 @@ void LocalSelector::on_update(float dt){
                 default:
                     break;
                 }
+                printf("\n");
+                for(int i=0;i<5;i++) {
+                    for(int j=0;j<5;j++) {
+                        printf("%i", (*m_field[i][j]));
+                    }
+                    printf("\n");
+                }
+            } else {
+                printf("\nsome shit here! \n"); 
+                for(int i=0;i<5;i++) {
+                    for( int j=0;j<5;j++) {
+                        printf("%i", (*m_field[i][j]));
+                    }
+                    printf("\n");
+                }
             }
         }
 

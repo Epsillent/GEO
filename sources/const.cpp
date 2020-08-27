@@ -1,9 +1,9 @@
 #include "const.hpp"
 
 const int GeoPropeties::generator_health = 2;
-const int GeoPropeties::protector_health = 5;
-const int GeoPropeties::shooter_health   = 2;
-const int GeoPropeties::base_health      = 5;
+const int GeoPropeties::protector_health = 5; // bd 1.1 -> 
+const int GeoPropeties::shooter_health   = 2; // bd 1.1 -> 3
+const int GeoPropeties::base_health      = 5; // bd 1.1 -> 10 
 
 const int GeoPropeties::figure_edge = 100;
 const int GeoPropeties::base_height = 100;
@@ -16,9 +16,9 @@ const int GeoPropeties::protector_price = 3;
 const float GeoPropeties::generator_rate = 4;
 const float GeoPropeties::shooter_rate = 6;
 
-const float GeoPropeties::generator_gives = 1;
+const float GeoPropeties::generator_gives = 100;
 
-const float GeoPropeties::bullet_speed = 200;
+const float GeoPropeties::bullet_speed = 200; // bd 1.1 -> 225
 const float GeoPropeties::bullet_lifetime = 5;
 
 const sf::Vector2f GeoPropeties::cell_size(100,100);
