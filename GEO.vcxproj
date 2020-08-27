@@ -32,7 +32,7 @@
     <ClCompile Include="sources\main.cpp" />
     <ClCompile Include="sources\scenes\battlefield.cpp" />
     <ClCompile Include="sources\scenes\main_menu.cpp" />
-    <ClCompile Include="sources\scenes\main_ui_controller.cpp" />
+    <ClCompile Include="sources\server.cpp" />
     <ClCompile Include="sources\utils\texture_pack.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -53,7 +53,7 @@
     <ClInclude Include="sources\entities\shooter.hpp" />
     <ClInclude Include="sources\scenes\battlefield.hpp" />
     <ClInclude Include="sources\scenes\main_menu.hpp" />
-    <ClInclude Include="sources\scenes\main_ui_controller.hpp" />
+    <ClInclude Include="sources\server.hpp" />
     <ClInclude Include="sources\utils\texture_pack.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

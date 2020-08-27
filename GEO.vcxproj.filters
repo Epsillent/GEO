@@ -56,13 +56,13 @@
     <ClCompile Include="sources\scenes\main_menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sources\scenes\main_ui_controller.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="sources\utils\texture_pack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sources\const.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\server.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -103,10 +103,10 @@
     <ClInclude Include="sources\scenes\main_menu.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sources\scenes\main_ui_controller.hpp">
+    <ClInclude Include="sources\utils\texture_pack.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sources\utils\texture_pack.hpp">
+    <ClInclude Include="sources\server.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
