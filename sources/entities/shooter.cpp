@@ -5,7 +5,8 @@
 #include <cmath>
 
 Shooter::Shooter(uint8 &cell, Side side): 
-    Entity(GeoPropeties::shooter_health,cell,side)
+    Entity(GeoPropeties::shooter_health,cell,side),
+    timer(GeoPropeties::shooter_rate/2.f)
 {
     m_body = component_add<Sprite2D>();
     m_body->set_texture(&GeoPropeties::texture_pack->shooter[side]);

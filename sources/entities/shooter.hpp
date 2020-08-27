@@ -8,7 +8,7 @@
 class Shooter: public Entity {
 private:
     sf::Vector2f m_direction;
-    float timer = 0;
+    float timer;
 
     ParticleSystemProperties bullet_partical_sys_pr;
     Sprite2D *m_body;

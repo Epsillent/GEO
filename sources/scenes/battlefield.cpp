@@ -93,10 +93,11 @@ Battlefield::Battlefield(const Host &host):
 {
     local_selector = nullptr;
     remote_selector = nullptr;
+    
+    memset(field,0,sizeof(field));
 }
 void Battlefield::on_introduce() {
     sf::Clock time;
-    memset(field,0,sizeof(field));
     if(autoconnect){
         connect(localhost);
     }else{
