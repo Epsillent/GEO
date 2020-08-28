@@ -4,23 +4,32 @@
 #include "components/trigger_2d.hpp"
 #include "const.hpp"
 #include "utils/debug.hpp"
+#include "scenes/battlefield.hpp"
 
-Generator::Generator(uint8 &cell, Side side,Resources* resources_to_update): 
-    Entity(GeoPropeties::generator_health,cell,side),
-    m_give(GeoPropeties::generator_gives),
-    m_resources_to_update(resources_to_update)
-{
+
+void Generator::on_introduce(){
+    Entity::on_introduce();
+    decrease_owner_resources(GeoPropeties::generator_price);
+
+    m_health = GeoPropeties::generator_health;
+    timer = 0;
     body = component_add<Sprite2D>();
-    body->set_texture(&GeoPropeties::texture_pack->generator[side]);
+    body->set_texture(&GeoPropeties::texture_pack->generator[m_side]);
     body->set_size(sf::Vector2f(GeoPropeties::figure_edge, GeoPropeties::figure_edge));
     
     set_tag("generator");
-}   
+}
 
 void Generator::on_update(float dt) {
     timer+=dt;
     if(timer > GeoPropeties::generator_rate) {
-        m_resources_to_update->resources_increase(m_give);
+        increase_owner_resources(GeoPropeties::generator_gives);
         timer -= GeoPropeties::generator_rate;
     }
+}
+
+void Generator::on_network_translate(const sf::Vector2f &position){
+    //Info("RemoteBase:OnTranslate: " + ARG_VEC("LocalPosition",position) + ARG_VEC("SetPosition",sf::Vector2f(DisplayServer::window_size().x-position.x-GeoPropeties::selector_size.x,position.y)));
+    set_local_position(sf::Vector2f(DisplayServer::window_size().x-position.x-GeoPropeties::figure_edge,position.y));
+    //set_local_position(position);
 }

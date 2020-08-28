@@ -4,9 +4,16 @@
 #include "entities/selector/selector.hpp"
 #include "core/math/random.hpp"
 #include "entities/base.hpp"
+#include "entities/generator.hpp"
+#include "entities/shooter.hpp"
+#include "entities/protector.hpp"
 int main() {
     NetworkObjectsDB::register_object_representation<LocalSelector,RemoteSelector>();
     NetworkObjectsDB::register_object<Base>();
+    NetworkObjectsDB::register_object<Entity>();
+    NetworkObjectsDB::register_object<Shooter>();
+    NetworkObjectsDB::register_object<Protector>();
+    NetworkObjectsDB::register_object<Generator>();
     
 
     Engine *engine = new Engine;

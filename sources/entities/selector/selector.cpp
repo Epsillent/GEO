@@ -63,25 +63,18 @@ void LocalSelector::on_update(float dt){
                 switch (m_selected)
                 {
                 case EntitiesList::GeneratorType:
-                    if(((Battlefield*)scene())->m_left_resources->m_resources_count-GeoPropeties::generator_price >= 0){
-                        ((Battlefield*)scene())->m_left_resources->resources_decrease(GeoPropeties::generator_price);
-                        object_introduce(new Generator((*m_field)[m_current_cell.y][m_current_cell.x],Side::Left,((Battlefield*)scene())->m_left_resources))->translate(GeoPropeties::offset_in_selector);
-                        //printf("the the the %i", (*m_field)[m_current_cell.x][m_current_cell.y]);
-                        originator_event(OriginatorEvent(m_selected));
+                    if(((Battlefield*)scene())->m_resources[Side::Left]->m_resources_count-GeoPropeties::generator_price >= 0){
+                        network_object_introduce((new Generator())->bind_cell(&(*m_field)[m_current_cell.y][m_current_cell.x]),GeoPropeties::offset_in_selector);
                     }
                     break;
                 case EntitiesList::ShooterType:
-                    if(((Battlefield*)scene())->m_left_resources->m_resources_count-GeoPropeties::shooter_price >= 0){
-                        ((Battlefield*)scene())->m_left_resources->resources_decrease(GeoPropeties::shooter_price);
-                        object_introduce(new Shooter((*m_field)[m_current_cell.y][m_current_cell.x],Side::Left))->translate(GeoPropeties::offset_in_selector);
-                        originator_event(OriginatorEvent(m_selected));
+                    if(((Battlefield*)scene())->m_resources[Side::Left]->m_resources_count-GeoPropeties::shooter_price >= 0){
+                        network_object_introduce((new Shooter())->bind_cell( &(*m_field)[m_current_cell.y][m_current_cell.x]),GeoPropeties::offset_in_selector);
                     }
                     break;
                 case EntitiesList::ProtectorType:
-                    if(((Battlefield*)scene())->m_left_resources->m_resources_count-GeoPropeties::protector_price>=0){
-                        ((Battlefield*)scene())->m_left_resources->resources_decrease(GeoPropeties::protector_price);
-                        object_introduce(new Protector((*m_field)[m_current_cell.y][m_current_cell.x], Side::Left))->translate(GeoPropeties::offset_in_selector);
-                        originator_event(OriginatorEvent(m_selected));
+                    if(((Battlefield*)scene())->m_resources[Side::Left]->m_resources_count-GeoPropeties::protector_price>=0){
+                        network_object_introduce((new Protector())->bind_cell(&(*m_field)[m_current_cell.y][m_current_cell.x]),GeoPropeties::offset_in_selector);
                     }
                     break;
                 default:
@@ -139,23 +132,7 @@ void RemoteSelector::on_introduce(){
     mp_body->set_texture(&GeoPropeties::texture_pack->selector[Side::Right]);
 }
 void RemoteSelector::on_originator_event(const OriginatorEvent &event){
-    switch ((EntitiesList)event.event_code)
-    {
-    case EntitiesList::GeneratorType:
-        ((Battlefield*)scene())->m_right_resources->resources_decrease(GeoPropeties::generator_price);
-        object_introduce(new Generator(fantom,Side::Right,((Battlefield*)scene())->m_right_resources))->translate(GeoPropeties::offset_in_selector);
-        break;
-    case EntitiesList::ShooterType:
-        ((Battlefield*)scene())->m_right_resources->resources_decrease(GeoPropeties::shooter_price);
-        object_introduce(new Shooter(fantom,Side::Right))->translate(GeoPropeties::offset_in_selector);
-        break;
-    case EntitiesList::ProtectorType:
-        ((Battlefield*)scene())->m_right_resources->resources_decrease(GeoPropeties::protector_price);
-        object_introduce(new Protector(fantom, Side::Right))->translate(GeoPropeties::offset_in_selector);
-        break;
-    default:
-        break;
-    }
+
 }
 
 void RemoteSelector::on_network_translate(const sf::Vector2f &position){

@@ -6,6 +6,7 @@
 #include "entities/entity.hpp"
 
 class Shooter: public Entity {
+    NETWORK_CLASS(Shooter,Entity)
 private:
     sf::Vector2f m_direction;
     float timer;
@@ -13,8 +14,10 @@ private:
     ParticleSystemProperties bullet_partical_sys_pr;
     Sprite2D *m_body;
 public:
-    Shooter(uint8 &cell, Side side);
+    Shooter() = default;
+    void on_introduce()override;
     void on_update(float dt) override;
+    void on_network_translate(const sf::Vector2f &position)override;
 };
 
 #endif

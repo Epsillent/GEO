@@ -6,14 +6,15 @@
 #include "ui/ui.hpp"
 
 class Generator: public Entity {
+    NETWORK_CLASS(Generator,Entity)
     private:    
         Sprite2D *body;
-        float m_give;
-        float timer=0;
-        Resources *m_resources_to_update;
+        float timer;
     public:
-        Generator(uint8 &cell, Side side, Resources *resources_to_update );
+        Generator() = default;
+        void on_introduce()override;
         void on_update(float dt)override;
+        void on_network_translate(const sf::Vector2f &position)override;
 };
 
 #endif

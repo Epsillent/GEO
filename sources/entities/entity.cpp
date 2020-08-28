@@ -6,16 +6,19 @@
 #include "bullet.hpp"
 #include "scenes/battlefield.hpp"
 
-Entity::Entity(int health, uint8 &cell, Side side):
-      m_health(health),
-      m_cell(cell),
-      m_side(side)
+Entity::Entity():
+      m_cell(nullptr)
 {
-
+      
 }
 
 void Entity::on_introduce(){
-      m_cell=1;
+      if(type()==NetworkObject::Type::Originator){
+            m_side = Side::Left;
+      }else{
+            m_side = Side::Right;
+            m_cell = nullptr;
+      }
       Trigger2DProperties pr_trigger_2d;
       pr_trigger_2d.callback = CALLBACK(&Entity::on_collided);
       pr_trigger_2d.size = Trigger2D::size(GeoPropeties::figure_edge, GeoPropeties::figure_edge);
@@ -48,5 +51,21 @@ void Entity::set_collider_size(sf::Vector2f size) {
 }
 
 void Entity::on_destroy(){
-      m_cell=0;
+      if(m_cell)
+            *m_cell=0;
+}
+
+
+void Entity::decrease_owner_resources(int resources){
+     ((Battlefield*)scene())->m_resources[m_side]->resources_decrease(resources);
+}
+void Entity::increase_owner_resources(int resources){
+     ((Battlefield*)scene())->m_resources[m_side]->resources_increase(resources);
+
+}
+
+Entity *Entity::bind_cell(uint8 *cell){
+      m_cell = cell;
+      *m_cell = 1;
+      return this;
 }

@@ -27,6 +27,7 @@ class Background: public GameObject{
 public:
     Background();
 };
+class Entity;
 class Base;
 class LocalSelector;
 class RemoteSelector;
@@ -36,14 +37,14 @@ class Battlefield: public NetworkScene {
         bool autoconnect;
         bool game_finished;
         Host localhost;
-        Resources *m_left_resources;
-        Resources *m_right_resources;
+        Resources *m_resources[2];
         static LocalSelector *local_selector;
         static RemoteSelector *remote_selector;
         BattlefieldUIController *ui_controller;
         
         uint8 field[5][5];
         uint8 fantom;
+        friend class Entity;
         friend class Base;
         friend class Selector;
         friend class RemoteSelector;

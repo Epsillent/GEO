@@ -7,10 +7,14 @@
 #include "entities/entity.hpp"
 
 class Protector: public Entity {
+    NETWORK_CLASS(Protector, Entity)
     private:
         Sprite2D *m_c_body;
     public:
-        Protector(uint8 &cell, Side side);
+        Protector() = default;
+
+        void on_introduce()override;
+        void on_network_translate(const sf::Vector2f &position)override;
 };
 
 #endif

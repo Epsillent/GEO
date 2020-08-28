@@ -124,11 +124,11 @@ void Battlefield::on_introduce() {
     ui_controller = new BattlefieldUIController();
     set_ui_controller( ui_controller );
    
-    m_right_resources = new Resources(ui_controller->right_resources_text_view);
-    m_left_resources = new Resources(ui_controller->left_resources_text_view);
+    m_resources[Side::Right] = new Resources(ui_controller->right_resources_text_view);
+    m_resources[Side::Left] = new Resources(ui_controller->left_resources_text_view);
 
-    m_left_resources->resources_increase(3);
-    m_right_resources->resources_increase(3);            
+    m_resources[Side::Left]->resources_increase(3);
+    m_resources[Side::Right]->resources_increase(3);            
 
     
     for(int i = 0; i<3; i++){
